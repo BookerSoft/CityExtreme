@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "restore": {
+    "c:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\CityExtreme.csproj": {}
+  },
+  "projects": {
+    "c:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\CityExtreme.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\CityExtreme.csproj",
+        "projectName": "CityExtreme",
+        "projectPath": "c:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\CityExtreme.csproj",
+        "packagesPath": "C:\\Users\\Joshua Booker\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Joshua Booker\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Alis.Core-SFML": {
+              "target": "Package",
+              "version": "[1.3.6, )"
+            },
+            "SFML.Net": {
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "csfml": {
+              "target": "Package",
+              "version": "[2.5.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
