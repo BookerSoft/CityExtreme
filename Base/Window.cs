@@ -38,10 +38,10 @@ namespace CityExtreme.Base{
                                 else{
                                     switch(Support.b.curobjective){
                                         case "Total Daily Profit":{
-                                            if(PreGame_Menu.PreLobby_FE.menuDDVisible[0]){
+                                            if(Support.b.preLobby.menuDropDowns !=null &&Support.b.preLobby.menuDropDowns[0].ddvisible == true ){
                                                 Draw(Support.b.preLobby);
 
-                                            }else if(PreGame_Menu.PreLobby_FE.menuDDVisible[1]){
+                                            }else if(Support.b.preLobby.menuDropDowns !=null && Support.b.preLobby.menuDropDowns[1].ddvisible == true){
                                                 Draw(Support.b.preLobby);
                                             }else{
                                                 Draw(Support.b.preLobby);

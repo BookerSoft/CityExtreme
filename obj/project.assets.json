@@ -1117,11 +1117,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\CityExtreme.csproj",
+      "projectUniqueName": "C:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\CityExtreme.csproj",
       "projectName": "CityExtreme",
-      "projectPath": "c:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\CityExtreme.csproj",
+      "projectPath": "C:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\CityExtreme.csproj",
       "packagesPath": "C:\\Users\\Joshua Booker\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\obj\\",
+      "outputPath": "C:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Joshua Booker\\AppData\\Roaming\\NuGet\\NuGet.Config"

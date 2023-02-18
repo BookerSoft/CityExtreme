@@ -49,9 +49,9 @@ namespace CityExtreme.Base.Gui{
             switch(e.Button){
                 case Mouse.Button.Left:{
                 if(_self.selItemLabel !=null && _self.selItemLabel.GetGlobalBounds().Contains(e.X,e.Y)){
-                    if(PreGame_Menu.PreLobby_FE.menuDDVisible[_self.id] == false)
+                    if(_self.ddvisible == false)
                     {
-                        PreGame_Menu.PreLobby_FE.menuDDVisible[_self.id] = true;
+                        _self.ddvisible = true;
                         Console.Write(PreGame_Menu.PreLobby_FE.menuDDVisible[_self.id]);
                     }
                     else
@@ -75,7 +75,7 @@ namespace CityExtreme.Base.Gui{
         {
             DescLabel.Draw(target,states);
             selItemLabel.Draw(target,states);
-            if(PreGame_Menu.PreLobby_FE.menuDDVisible[0] == true||PreGame_Menu.PreLobby_FE.menuDDVisible[1] == true){
+            if(ddvisible == true||PreGame_Menu.PreLobby_FE.menuDDVisible[1] == true){
                 ddbacking.Draw(target,states);
                 for(int a=0;a<pgcnt;a++){
                     if(curpg>=0){

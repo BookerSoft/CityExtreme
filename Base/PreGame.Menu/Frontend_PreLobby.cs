@@ -153,7 +153,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                 if(menuDropDowns !=null){
                     foreach(Gui.DropDownMenu dd in menuDropDowns){
                         if(dd != null){
-                            if(menuDDVisible[dd.id])
+                            if(dd.ddvisible)
                             {dd.Draw(target,states);
                             }
                             else

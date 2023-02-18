@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JSw2gbXSScWvXOwxB6TEyxqRgPwf73rtXWb3GitiKGQgSJ2O3YXG2OasEM7pXwYbrKoQ0BUtwFLC24lLtOhHyw==",
+  "dgSpecHash": "dDKmUqe9sP/rfIL+7gUnTd1VtMCe5RKmdkABxOonSxA8ISfEh8DZa5CB0TrkeOh+zZaDvaRjWxZdcSDxxJLitA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\CityExtreme.csproj",
+  "projectFilePath": "C:\\Users\\Joshua Booker\\Documents\\GitHub\\CityExtreme\\CityExtreme.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Joshua Booker\\.nuget\\packages\\alis.core\\1.3.6\\alis.core.1.3.6.nupkg.sha512",
     "C:\\Users\\Joshua Booker\\.nuget\\packages\\alis.core-sfml\\1.3.6\\alis.core-sfml.1.3.6.nupkg.sha512",
