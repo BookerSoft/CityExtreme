@@ -9,6 +9,8 @@ namespace CityExtreme.Base.PreGame_Menu{
         public Text[] objButton = new Text[Support.b.objective.Length];
         public Gui.DropDownMenu[] menuDropDowns; 
         public static bool[] menuDDVisible;
+        public bool[] forlastddin = new bool[4];
+        public static int lastddin =-1,curddin=-1;
         static PreLobby_FE _self;
         public PreLobby_FE(string type, ContextSettings? cs){
             //Global Titles for Sections
@@ -103,28 +105,43 @@ namespace CityExtreme.Base.PreGame_Menu{
 
             }
         }
-        public static void MouseClick(object? sender, MouseButtonEventArgs e){
-            switch(e.Button){
-                case Mouse.Button.Left:{
-                    for(int i =0;i<_self.objButton.Length;i++){
-                        if(_self.objButton[i].GetGlobalBounds().Contains(e.X,e.Y)){
+        static void objsel(){
+            for(int i =0;i<_self.objButton.Length;i++){
+                        if(_self.objButton[i].GetGlobalBounds().Contains(Mouse.GetPosition().X,Mouse.GetPosition().Y)){
                             _self.objButton[i].FillColor = Color.Green;
                             Support.b.curobjective = _self.objButton[i].DisplayedString;
                             Support.b.objSelected[i] = true;
                             _self.initandPositionDropdowns();
+                        }else if(Support.b.curobjective == _self.objButton[i].DisplayedString){
+                            Support.b.objSelected[i] = true;
                         }else{
                             Support.b.objSelected[i] = false;
                         }
 
                     }
+        }
+        public static void MouseClick(object? sender, MouseButtonEventArgs e){
+            switch(e.Button){
+                case Mouse.Button.Left:{
+                    
                     if(Support.b.curobjective == "Total Daily Profit"){
-                        if(_self.menuDropDowns[0].backing.GetGlobalBounds().Contains(e.X,e.Y)){
-                            Gui.DropDownMenu.MouseClick(sender,e);
+                        objsel();
+                        bool ib,insil;
+                        if(_self.menuDropDowns[lastddin] !=null ){
+                            ib = _self.forlastddin[0];
+                            insil = _self.forlastddin[1];
+                            if(ib && insil && _self.menuDropDowns[lastddin].isvisible == false){
+                                    _self.menuDropDowns[lastddin].isvisible = true;
+                                    //Console.Write(_self.menuDropDowns[_self.lastddin].ddvisible.ToString()+Environment.NewLine);
+                                    objsel();
+                            }
                                 
                             
                         }else if(_self.menuDropDowns[1].backing.GetGlobalBounds().Contains(e.X,e.Y)){
                             Gui.DropDownMenu.MouseClick(sender,e);
                         }
+                    }else{
+                        objsel();
                     }
                     break;
                 }
@@ -153,8 +170,10 @@ namespace CityExtreme.Base.PreGame_Menu{
                 if(menuDropDowns !=null){
                     foreach(Gui.DropDownMenu dd in menuDropDowns){
                         if(dd != null){
-                            if(dd.ddvisible)
-                            {dd.Draw(target,states);
+                            Console.WriteLine(Gui.DropDownMenu.ddvisible.ToString());
+                            if(Gui.DropDownMenu.ddvisible == true)
+                            {
+                                dd.Draw(target,states);
                             }
                             else
                             dd.Draw(target,states);

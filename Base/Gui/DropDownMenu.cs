@@ -8,7 +8,16 @@ namespace CityExtreme.Base.Gui{
         public Text DescLabel,selItemLabel;
         public Text[] ddItems;
         public int pgcnt=0,perpg=0,id,curpg=0;
-        public bool ddvisible=false;
+        public static bool ddvisible=false,inbacking =false,inselitemlabel=false;
+        public bool isvisible{
+            get{
+                return ddvisible;
+
+            }
+            set{
+                ddvisible =value;
+            }
+        }
         public RectangleShape backing;
         public RectangleShape ddbacking;
         public VertexArray[] arrow = new VertexArray[2];
@@ -27,12 +36,13 @@ namespace CityExtreme.Base.Gui{
             ddItems = new Text[displayed.Length];
             for(int a=0;a<displayed.Length;a++){
                 ddItems[a]=new Text(displayed[a],Support.b.defFont,35); 
+                ddItems[a].FillColor =Color.Black;
             }
             ddbacking = new RectangleShape();
             ddbacking.Position = new Vector2f(selItemLabel.Position.X, selItemLabel.Position.Y+selItemLabel.GetGlobalBounds().Height);
             pgcnt = pages;
             perpg = ddItems.Length/pages;
-            ddbacking.Size = new Vector2f(ddItems[0].GetGlobalBounds().Width+10,400);
+            ddbacking.Size = new Vector2f(ddItems[0].GetGlobalBounds().Width+100,400);
             ddbacking.FillColor=Color.White;
             for(int a=0;a<ddItems.Length;a++){
                 if(a==0||a==7){
@@ -45,22 +55,66 @@ namespace CityExtreme.Base.Gui{
 
 
         }
+        public static bool[] MouseMoved(object sender, MouseMoveEventArgs e){
+            bool[] _in= new bool[2];
+            if(((IntRect)_self.backing.GetLocalBounds()).Contains(e.X,e.Y)){
+                PreGame_Menu.PreLobby_FE.curddin = _self.id;
+                _in[0] = true;
+                _in[1] = false;
+            
+                Console.WriteLine(_in[0].ToString());
+                
+                
+                
+                
+                //System.IO.File.AppendAllText("dd_mmlog.txt", _self.inbacking.ToString()+"  "+_self.inselitemlabel.ToString()+Environment.NewLine);
+                return _in;
+            }else if(((IntRect)_self.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y)){
+                    _in[0] = true;
+                    _in[1] =true;
+                    PreGame_Menu.PreLobby_FE.curddin = _self.id;
+
+                    return _in;
+                }else{
+                _in[0] = false;
+                PreGame_Menu.PreLobby_FE.lastddin = PreGame_Menu.PreLobby_FE.curddin;
+                PreGame_Menu.PreLobby_FE.curddin = -1;
+                _in[1] = false;
+                return _in;
+            }
+        }
+        public static int MouseInDDId(object sender,MouseMoveEventArgs e){
+            if(((IntRect)_self.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y)){
+                return _self.id;
+            }else{
+                if(PreGame_Menu.PreLobby_FE.lastddin != PreGame_Menu.PreLobby_FE.curddin){
+                    PreGame_Menu.PreLobby_FE.lastddin = PreGame_Menu.PreLobby_FE.curddin;
+                    return -1;
+
+                }else{
+                    return -1;
+                }
+                
+            }
+        }
         public static void MouseClick(object? sender,MouseButtonEventArgs e){
             switch(e.Button){
                 case Mouse.Button.Left:{
-                if(_self.selItemLabel !=null && _self.selItemLabel.GetGlobalBounds().Contains(e.X,e.Y)){
-                    if(_self.ddvisible == false)
+                if(inbacking == true && inselitemlabel == true){
+                    if(ddvisible == false)
                     {
-                        _self.ddvisible = true;
-                        Console.Write(PreGame_Menu.PreLobby_FE.menuDDVisible[_self.id]);
+                        ddvisible = true;
+                        Console.Write(ddvisible.ToString());
                     }
                     else
-                    PreGame_Menu.PreLobby_FE.menuDDVisible[_self.id] = false;
+                        ddvisible = false;
                 }
                 break;
-            }
+                }
+            
             }
         }
+        
         public static void wheelMoved(object? sender, MouseWheelScrollEventArgs e){
             if(e.Wheel == Mouse.Wheel.VerticalWheel){
                 if(e.Delta < 0 && _self.curpg>0 && _self.curpg<=_self.pgcnt-1){
@@ -75,8 +129,8 @@ namespace CityExtreme.Base.Gui{
         {
             DescLabel.Draw(target,states);
             selItemLabel.Draw(target,states);
-            if(ddvisible == true||PreGame_Menu.PreLobby_FE.menuDDVisible[1] == true){
-                ddbacking.Draw(target,states);
+            if(ddvisible == true){
+               ddbacking.Draw(target,states);
                 for(int a=0;a<pgcnt;a++){
                     if(curpg>=0){
                         for(int b=(a*perpg);b<(a+1)*perpg;b++){

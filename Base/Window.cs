@@ -6,9 +6,36 @@ namespace CityExtreme.Base{
     public class Window:RenderWindow{
         public Window(VideoMode m):base(m,"City Extreme",SFML.Window.Styles.Fullscreen,new ContextSettings(32,32,2,3,1,ContextSettings.Attribute.Core,true)){
             MouseButtonPressed += MouseClick;
+            MouseMoved += MouseMove;
         }
 
-       
+       public static void MouseMove(object? sender, MouseMoveEventArgs e){
+        if(Support.b.state == 0 && Support.b.menu ==1 && Support.b.menupg ==0&& Support.b.curobjective == "Total Daily Profit"){
+            foreach(Gui.DropDownMenu dd in Support.b.preLobby.menuDropDowns){
+                if(dd!=null){
+                    if(((IntRect)dd.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y)){
+                        PreGame_Menu.PreLobby_FE.curddin = dd.id;
+                        Console.WriteLine(PreGame_Menu.PreLobby_FE.curddin.ToString());
+                        Support.b.preLobby.forlastddin[0] =true;
+                        Support.b.preLobby.forlastddin[1] = true;
+                        //Support.b.preLobby.forlastddin[2] = false;
+                        //Support.b.preLobby.forlastddin[3] = false;
+                        if(PreGame_Menu.PreLobby_FE.curddin != PreGame_Menu.PreLobby_FE.lastddin && PreGame_Menu.PreLobby_FE.curddin >=0){
+                            PreGame_Menu.PreLobby_FE.lastddin = PreGame_Menu.PreLobby_FE.curddin;
+                            Console.Write(PreGame_Menu.PreLobby_FE.lastddin);
+                        }
+                    }
+                }
+            }
+                
+                        
+                    
+            
+                        
+            
+            
+        }
+       }
         public static void MouseClick(object? sender, MouseButtonEventArgs e){
             if(Support.b.state == 0 && Support.b.menu ==0){
                 if(Support.b.main != null){
@@ -17,7 +44,7 @@ namespace CityExtreme.Base{
             }else if(Support.b.state == 0 && Support.b.menu ==1 && Support.b.menupg == 0){
                 if(Support.b.preLobby != null){
                     PreGame_Menu.PreLobby_FE.MouseClick(sender,e);
-                    Gui.DropDownMenu.MouseClick(sender,e);
+                    
                 }
             }
 
@@ -38,14 +65,9 @@ namespace CityExtreme.Base{
                                 else{
                                     switch(Support.b.curobjective){
                                         case "Total Daily Profit":{
-                                            if(Support.b.preLobby.menuDropDowns !=null &&Support.b.preLobby.menuDropDowns[0].ddvisible == true ){
+                                            
                                                 Draw(Support.b.preLobby);
-
-                                            }else if(Support.b.preLobby.menuDropDowns !=null && Support.b.preLobby.menuDropDowns[1].ddvisible == true){
-                                                Draw(Support.b.preLobby);
-                                            }else{
-                                                Draw(Support.b.preLobby);
-                                            }
+                                            
                                             break;
                                         }
                                     }
