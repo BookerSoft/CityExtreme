@@ -129,10 +129,10 @@ namespace CityExtreme.Base.Gui{
         {
             DescLabel.Draw(target,states);
             selItemLabel.Draw(target,states);
-            if(ddvisible == true){
+            if(isvisible == true && PreGame_Menu.PreLobby_FE.curddin>=0 &&PreGame_Menu.PreLobby_FE.curddin == PreGame_Menu.PreLobby_FE.lastddin){
                ddbacking.Draw(target,states);
                 for(int a=0;a<pgcnt;a++){
-                    if(curpg>=0){
+                    if(curpg>=0 && a==curpg){
                         for(int b=(a*perpg);b<(a+1)*perpg;b++){
                             ddItems[b].Draw(target,states);
                         }

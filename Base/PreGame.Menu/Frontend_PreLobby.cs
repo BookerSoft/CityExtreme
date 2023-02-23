@@ -9,7 +9,8 @@ namespace CityExtreme.Base.PreGame_Menu{
         public Text[] objButton = new Text[Support.b.objective.Length];
         public Gui.DropDownMenu[] menuDropDowns; 
         public static bool[] menuDDVisible;
-        public bool[] forlastddin = new bool[4];
+        public static bool[] forlastddin = new bool[4];
+        
         public static int lastddin =-1,curddin=-1;
         static PreLobby_FE _self;
         public PreLobby_FE(string type, ContextSettings? cs){
@@ -127,13 +128,15 @@ namespace CityExtreme.Base.PreGame_Menu{
                     if(Support.b.curobjective == "Total Daily Profit"){
                         objsel();
                         bool ib,insil;
-                        if(_self.menuDropDowns[lastddin] !=null ){
-                            ib = _self.forlastddin[0];
-                            insil = _self.forlastddin[1];
+                        if(lastddin == _self.menuDropDowns[lastddin].id&&_self.menuDropDowns[lastddin] !=null ){
+                            ib = forlastddin[0];
+                            insil = forlastddin[1];
                             if(ib && insil && _self.menuDropDowns[lastddin].isvisible == false){
                                     _self.menuDropDowns[lastddin].isvisible = true;
-                                    //Console.Write(_self.menuDropDowns[_self.lastddin].ddvisible.ToString()+Environment.NewLine);
+                                    Console.Write(_self.menuDropDowns[lastddin].isvisible.ToString()+Environment.NewLine);
                                     objsel();
+                            }else{
+                                _self.menuDropDowns[lastddin].isvisible = false;
                             }
                                 
                             
@@ -169,9 +172,9 @@ namespace CityExtreme.Base.PreGame_Menu{
             
                 if(menuDropDowns !=null){
                     foreach(Gui.DropDownMenu dd in menuDropDowns){
-                        if(dd != null){
+                        if(dd != null ){
                             Console.WriteLine(Gui.DropDownMenu.ddvisible.ToString());
-                            if(Gui.DropDownMenu.ddvisible == true)
+                            if(dd.id == lastddin && dd.isvisible == true )
                             {
                                 dd.Draw(target,states);
                             }

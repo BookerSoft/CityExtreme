@@ -16,13 +16,17 @@ namespace CityExtreme.Base{
                     if(((IntRect)dd.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y)){
                         PreGame_Menu.PreLobby_FE.curddin = dd.id;
                         Console.WriteLine(PreGame_Menu.PreLobby_FE.curddin.ToString());
-                        Support.b.preLobby.forlastddin[0] =true;
-                        Support.b.preLobby.forlastddin[1] = true;
-                        //Support.b.preLobby.forlastddin[2] = false;
-                        //Support.b.preLobby.forlastddin[3] = false;
+                        PreGame_Menu.PreLobby_FE.forlastddin[0] =true;
+                        PreGame_Menu.PreLobby_FE.forlastddin[1] = true;
+                        PreGame_Menu.PreLobby_FE.forlastddin[2] = false;
+                        PreGame_Menu.PreLobby_FE.forlastddin[3] = false;
                         if(PreGame_Menu.PreLobby_FE.curddin != PreGame_Menu.PreLobby_FE.lastddin && PreGame_Menu.PreLobby_FE.curddin >=0){
                             PreGame_Menu.PreLobby_FE.lastddin = PreGame_Menu.PreLobby_FE.curddin;
                             Console.Write(PreGame_Menu.PreLobby_FE.lastddin);
+                          PreGame_Menu.PreLobby_FE.forlastddin[0] =true;
+                        PreGame_Menu.PreLobby_FE.forlastddin[1] = true;
+                        PreGame_Menu.PreLobby_FE.forlastddin[2] = false;
+                        PreGame_Menu.PreLobby_FE.forlastddin[3] = false;  
                         }
                     }
                 }
