@@ -29,6 +29,12 @@ namespace CityExtreme.Base{
                         PreGame_Menu.PreLobby_FE.forlastddin[3] = false;  
                         }
                     }
+                }else{
+                    
+                    PreGame_Menu.PreLobby_FE.forlastddin[0] =false;
+                        PreGame_Menu.PreLobby_FE.forlastddin[1] = false;
+                        PreGame_Menu.PreLobby_FE.forlastddin[2] = false;
+                        PreGame_Menu.PreLobby_FE.forlastddin[3] = false; 
                 }
             }
                 
