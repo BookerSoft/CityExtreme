@@ -8,8 +8,9 @@ namespace CityExtreme.Base.PreGame_Menu{
         public Text Title,objTitle,gameSetTitle,selMapTitle,ScenDescTitle,sessNameLabel,sessNameText;
         public Text[] objButton = new Text[Support.b.objective.Length];
         public Gui.DropDownMenu[] menuDropDowns; 
+        
         public static bool[] menuDDVisible;
-        public static bool[] forlastddin = new bool[4];
+        public static bool[][] forddin = new bool[10][],issilclicked = new bool[10][];
         
         public static int lastddin =-1,curddin=-1;
         static PreLobby_FE _self;
@@ -38,6 +39,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                 case "local":{
                     Title = new Text(" Configure Local Session",Support.b.defFont,85);
                     sessNameLabel = new Text("Session Name: ",Support.b.defFont,30);
+                    
 
                     Title.FillColor = Color.White;
                     if(Support.b.w != null){
@@ -81,6 +83,7 @@ namespace CityExtreme.Base.PreGame_Menu{
             }
         }
         public void initandPositionDropdowns(){
+          
             for(int i=0;i<Support.b.objSelected.Length;i++){
                     if(Support.b.objSelected[i]){
                         objButton[i].FillColor = Color.Green;
@@ -96,12 +99,47 @@ namespace CityExtreme.Base.PreGame_Menu{
 
                         }
                         menuDropDowns[0] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(sessNameLabel.Position.X,sessNameLabel.Position.Y+sessNameLabel.GetGlobalBounds().Height+sessNameText.GetGlobalBounds().Height+10),Support.b.objSettings[0,0,0],tmp,0);
+                        if(Support.b.plDDSilClicked[0] == null || Support.b.plForDDin[0] ==null)
+                        menuDropDowns[0].setNoOfBools();
+
+                        
                         tmp = new string[Support.b.ddItemStrings.GetLongLength(1)];
                         for(int i=0;i<Support.b.ddItemStrings.GetLongLength(1);i++){
                             tmp[i] = Support.b.ddItemStrings[1,i];
 
                         }
                         menuDropDowns[1] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(sessNameLabel.Position.X,menuDropDowns[0].backing.Position.Y+menuDropDowns[0].backing.GetGlobalBounds().Height+10),Support.b.objSettings[0,1,0],tmp,1);
+                        if(Support.b.plDDSilClicked[1] == null || Support.b.plForDDin[1] ==null)
+                        menuDropDowns[1].setNoOfBools();
+                        for(int a =0;a<menuDropDowns.Length;a++){
+                            if(a==lastddin && menuDropDowns[a]!=null){
+                                if(Support.b.plDDSilClicked[a][0] == true){
+                                    
+                                    for(int b=0;b<Support.b.plForDDin[a].Length;b++){
+                                        if(b<2){
+                                            Support.b.plForDDin[a][b] = true;
+                                        }else{
+                                            Support.b.plForDDin[a][b] = false;
+                                        }
+                                    }
+                                    menuDropDowns[a].isvisible =true;
+                                }
+                            }else if(menuDropDowns[a]!=null){
+                                if(Support.b.plDDSilClicked[a][0] == false){
+                                      for(int b=0;b<Support.b.plForDDin[a].Length;b++){
+                                        if(b<2){
+                                            Support.b.plForDDin[a][b] = false;
+                                        }else{
+                                            Support.b.plForDDin[a][b] = false;
+                                        }
+                                    }
+                                    menuDropDowns[a].isvisible =false;
+
+                                }
+                                
+                            }
+                        }
+                        
 
 
             }
@@ -124,35 +162,121 @@ namespace CityExtreme.Base.PreGame_Menu{
         public static void MouseClick(object? sender, MouseButtonEventArgs e){
             switch(e.Button){
                 case Mouse.Button.Left:{
-                    
                     if(Support.b.curobjective == "Total Daily Profit"){
                         objsel();
                         bool ib,insil;
-                        if(lastddin == _self.menuDropDowns[lastddin].id&&_self.menuDropDowns[lastddin] !=null ){
-                            ib = forlastddin[0];
-                            insil = forlastddin[1];
-                            if(ib && insil && _self.menuDropDowns[lastddin].isvisible == false){
-                                    _self.menuDropDowns[lastddin].isvisible = true;
-                                    Console.Write(_self.menuDropDowns[lastddin].isvisible.ToString()+Environment.NewLine);
+                        int l_id;
+                        if(lastddin>=0){
+                        l_id =lastddin;
+
+                            if( _self.menuDropDowns[l_id] !=null){
+                                
+                            ib = Support.b.plForDDin[l_id][0];
+                            insil = Support.b.plForDDin[l_id][1];
+                            if(ib && insil && lastddin == _self.menuDropDowns[l_id].id){
+                                
+                                foreach(Gui.DropDownMenu dd in _self.menuDropDowns){
+                                    if(dd != null)
+                                    
+                                    switch(dd.id){
+                                        case 0:{
+                                            Support.b.plDDSilClicked[dd.id][0] =true;
+                                            if(Support.b.plDDSilClicked[0][0] && Support.b.plForDDin[0][0])
+                                            {
+                                                _self.menuDropDowns[0].setsilclicked(true);
+                                                Support.b.plDDSilClicked[0][0] = _self.menuDropDowns[0].getsilclicked();
+                                                //Support.b.plDDSilClicked[1][0] = false;
+                                                                                            
+                                                }else{
+                                                _self.menuDropDowns[0].setsilclicked(false);
+                                                Support.b.plDDSilClicked[0][0] = _self.menuDropDowns[0].getsilclicked();
+
+                                            }
+                                            break;
+                                        }
+                                        case 1:{
+                                            Support.b.plDDSilClicked[dd.id][0] =true;
+                                            if(Support.b.plDDSilClicked[0][0] && Support.b.plForDDin[1][0]){
+                                                _self.menuDropDowns[1].setsilclicked(false);
+                                                Support.b.plDDSilClicked[1][0] =_self.menuDropDowns[1].getsilclicked();
+
+                                                Support.b.plForDDin[1][0] =false;
+                                                Support.b.plForDDin[1][1] = false;
+
+                                            }else if(Support.b.plDDSilClicked[1][0] && Support.b.plDDSilClicked[0][0] == false && Support.b.plForDDin[1][0]){
+                                                _self.menuDropDowns[1].setsilclicked(true);
+                                                Support.b.plDDSilClicked[1][0] =_self.menuDropDowns[1].getsilclicked();
+
+                                            }else{
+                                                Support.b.plDDSilClicked[1][0]=false;
+                                            }
+                                            
+                                            break;
+
+                                        }
+                                    }
+                                }
+                                
+                                     
+                                    Console.Write(_self.menuDropDowns[lastddin].getsilclicked().ToString() + _self.menuDropDowns[1].getsilclicked()+Environment.NewLine);
                                     objsel();
                             }else{
-                                _self.menuDropDowns[lastddin].isvisible = false;
+                                foreach(Gui.DropDownMenu dd in _self.menuDropDowns){
+                                    if(dd != null)
+                                    switch(dd.id){
+                                        case 0:{
+                                            
+                                            _self.menuDropDowns[0].setsilclicked(false);
+                                            Support.b.plForDDin[0][0] =false;
+                                            Support.b.plForDDin[0][1] = false;
+                                            Support.b.plDDSilClicked [0][0]= false;
+
+                                            break;
+                                        }
+                                        case 1:{
+                                            _self.menuDropDowns[1].setsilclicked(false);
+                                            Support.b.plDDSilClicked[1][0]=false;
+
+                                            break;
+
+                                        }
+                                    }
+                                }
+                                objsel();
+                            }
+                            }else{
+                                objsel();
                             }
                                 
+
+
                             
-                        }else if(_self.menuDropDowns[1].backing.GetGlobalBounds().Contains(e.X,e.Y)){
-                            Gui.DropDownMenu.MouseClick(sender,e);
+                        }else{
+                            objsel();
                         }
                     }else{
                         objsel();
-                    }
+                        }   
                     break;
+                    
+
+                    
                 }
             }
+
+                
+            
         }
+            
+                
+                    
+            
+            
+        
         
         public void Draw(RenderTarget target, RenderStates states)
         {
+            
             initandPositionDropdowns(); 
             Title.Draw(target,states);
             if(objTitle!=null)
@@ -171,19 +295,25 @@ namespace CityExtreme.Base.PreGame_Menu{
              
             
                 if(menuDropDowns !=null){
-                    foreach(Gui.DropDownMenu dd in menuDropDowns){
-                        if(dd != null ){
-                            Console.WriteLine(Gui.DropDownMenu.ddvisible.ToString());
-                            if(dd.id == lastddin && dd.isvisible == true )
-                            {
-                                dd.Draw(target,states);
-                            }
-                            else
-                            dd.Draw(target,states);
-                        }
-                    }
+                   
+                            
+                                for(int i=0;i<_self.menuDropDowns.Length;i++){
+                                    if(_self.menuDropDowns[i] != null){
+                                        if(_self.menuDropDowns[i].isvisible && Support.b.plDDSilClicked[i][0])
+                                        _self.menuDropDowns[i].Draw(target,states);
+                                        else
+                                        _self.menuDropDowns[i].Draw(target,states);
+                                    }
+
+                                }
+                            
+                            
                 }
+
             }
+                    
+                
+            
             selMapTitle.Draw(target,states);
             gameSetTitle.Draw(target,states);
             sessNameLabel.Draw(target,states);

@@ -10,42 +10,59 @@ namespace CityExtreme.Base{
         }
 
        public static void MouseMove(object? sender, MouseMoveEventArgs e){
-        if(Support.b.state == 0 && Support.b.menu ==1 && Support.b.menupg ==0&& Support.b.curobjective == "Total Daily Profit"){
+        if(Support.b.state == 0 && Support.b.menu ==1 && Support.b.menupg ==0&& Support.b.curobjective == "Total Daily Profit" && Support.b.preLobby.menuDropDowns!=null){
             foreach(Gui.DropDownMenu dd in Support.b.preLobby.menuDropDowns){
-                if(dd!=null){
-                    if(((IntRect)dd.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y)){
+                if(dd!=null ){
+                    if( !((IntRect)dd.backing.GetGlobalBounds()).Contains(e.X,e.Y) && !((IntRect)dd.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y)){
+                            for(int i =0;i<Support.b.plForDDin[dd.id].Length;i++){
+                            if(i<2)
+                            Support.b.plForDDin[dd.id][i]=false;
+                            else{
+                                Support.b.plForDDin[dd.id][i] =false;
+                            }
+                            }
+                            }else if( ((IntRect)dd.backing.GetGlobalBounds()).Contains(e.X,e.Y) && ((IntRect)dd.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y)){
                         PreGame_Menu.PreLobby_FE.curddin = dd.id;
                         Console.WriteLine(PreGame_Menu.PreLobby_FE.curddin.ToString());
-                        PreGame_Menu.PreLobby_FE.forlastddin[0] =true;
-                        PreGame_Menu.PreLobby_FE.forlastddin[1] = true;
-                        PreGame_Menu.PreLobby_FE.forlastddin[2] = false;
-                        PreGame_Menu.PreLobby_FE.forlastddin[3] = false;
+                        
+                        for(int i =0;i<Support.b.plForDDin[PreGame_Menu.PreLobby_FE.curddin].Length;i++){
+                            if(dd.id == PreGame_Menu.PreLobby_FE.curddin&&i<2)
+                            {
+                                Support.b.plForDDin[PreGame_Menu.PreLobby_FE.curddin][i]=true;
+                                
+                                }
+                            else if(i>=2){
+                                if(dd.id == PreGame_Menu.PreLobby_FE.curddin && i>=2)
+                                Support.b.plForDDin[dd.id][i] =false;
+                                else
+                                Support.b.plForDDin[dd.id][i] = false;
+                            }
+                        }
+                        
                         if(PreGame_Menu.PreLobby_FE.curddin != PreGame_Menu.PreLobby_FE.lastddin && PreGame_Menu.PreLobby_FE.curddin >=0){
                             PreGame_Menu.PreLobby_FE.lastddin = PreGame_Menu.PreLobby_FE.curddin;
                             Console.Write(PreGame_Menu.PreLobby_FE.lastddin);
-                          PreGame_Menu.PreLobby_FE.forlastddin[0] =true;
-                        PreGame_Menu.PreLobby_FE.forlastddin[1] = true;
-                        PreGame_Menu.PreLobby_FE.forlastddin[2] = false;
-                        PreGame_Menu.PreLobby_FE.forlastddin[3] = false;  
-                        }
+                           
+                        }  
+                            
+                        }  
+                    }else{
+                         
                     }
-                }else{
-                    
-                    PreGame_Menu.PreLobby_FE.forlastddin[0] =false;
-                        PreGame_Menu.PreLobby_FE.forlastddin[1] = false;
-                        PreGame_Menu.PreLobby_FE.forlastddin[2] = false;
-                        PreGame_Menu.PreLobby_FE.forlastddin[3] = false; 
                 }
-            }
+                     
+                        
+                
+            
                 
                         
                     
             
-                        
+        }            
             
             
-        }
        }
+        
         public static void MouseClick(object? sender, MouseButtonEventArgs e){
             if(Support.b.state == 0 && Support.b.menu ==0){
                 if(Support.b.main != null){
