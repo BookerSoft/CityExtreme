@@ -6,7 +6,7 @@ using SFML.Graphics;
 using SFML.Window;
 namespace CityExtreme.Base{
     public class Base{
-        public int state=0,menu=0,menupg=0,res_w=0,res_h=0,maxplayers=6;
+        public int state=0,menu=1,menupg=1,res_w=0,res_h=0,maxplayers=6;
         public Window w;
         public string curplayer="",curobjective="";
         public string[] objective = new string[8];
@@ -21,6 +21,7 @@ namespace CityExtreme.Base{
         public Font defFont;
         public PreGame_Menu.Main_FE main;
         public PreGame_Menu.PreLobby_FE preLobby;
+        public PreGame_Menu.Lobby_FE lobby;
         public VideoMode defMode;
         public Base(){
             defFont = new Font("C:\\Windows\\Fonts\\Arial.ttf");
@@ -115,11 +116,13 @@ namespace CityExtreme.Base{
         public void initMenus(ContextSettings cs){
             main = new PreGame_Menu.Main_FE(cs);
             if(menu == 1 && menupg ==0){
-                preLobby = new PreGame_Menu.PreLobby_FE("local",w.Settings);
+                preLobby = new PreGame_Menu.PreLobby_FE("local",cs);
 
             }else if(menu ==2 && menupg==1){
-                preLobby = new PreGame_Menu.PreLobby_FE("Network",w.Settings);
+                preLobby = new PreGame_Menu.PreLobby_FE("Network",cs);
                 
+            }else if(menu==1 && menupg ==1){
+                lobby = new PreGame_Menu.Lobby_FE(cs);
             }
         }
 

@@ -101,6 +101,8 @@ namespace CityExtreme.Base{
                                 }
                                 
 
+                            }else if(Support.b.menupg ==1){
+                                Draw(Support.b.lobby);
                             }
                             
                             break;
