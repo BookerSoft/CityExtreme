@@ -25,8 +25,27 @@ namespace CityExtreme.Base.PreGame_Menu{
                 Cancel.Position = new Vector2f(Support.b.w.Size.X/4,Support.b.w.Size.Y-(Cancel.GetGlobalBounds().Height*2));
                 Start.Position = new Vector2f(Cancel.Position.X+Cancel.GetGlobalBounds().Width+250,Cancel.Position.Y);
                 
-                playerRect[0].Size = new Vector2f(Support.b.w.Size.X/6,Support.b.w.Size.Y/3);
-                playerRect[0].Position = new Vector2f(10,Support.b.w.Size.Y*.25f);
+                playerRect[0].Size = new Vector2f(Support.b.w.Size.X/6.15f,Support.b.w.Size.Y/3);
+                playerRect[0].Position = new Vector2f(1,Support.b.w.Size.Y*.25f);
+                playerPicBox[0] = new RectangleShape();
+                playerPicBox[0].Position = new Vector2f(playerRect[0].GetGlobalBounds().Left,playerRect[0].GetGlobalBounds().Top);
+                playerPicBox[0].Size = new Vector2f(playerRect[0].GetGlobalBounds().Width,playerRect[0].GetGlobalBounds().Height*.75f);
+                playerPicBox[0].FillColor = Color.Blue;
+
+                for(int i=1;i<playerRect.Length;i++){
+                    playerRect[i] = new RectangleShape();
+                playerRect[i].OutlineColor = Color.White;
+                playerRect[i].FillColor = Color.Transparent;
+                playerRect[i].OutlineThickness = .25f;
+                    playerRect[i].Size = playerRect[i-1].Size;
+                    playerRect[i].Position = new Vector2f(playerRect[i-1].Position.X+playerRect[i-1].GetGlobalBounds().Width,playerRect[i-1].Position.Y);
+                    playerPicBox[i] = new RectangleShape();
+                playerPicBox[i].Position = new Vector2f(playerRect[i].GetGlobalBounds().Left,playerRect[i].GetGlobalBounds().Top);
+                playerPicBox[i].Size = new Vector2f(playerRect[i].GetGlobalBounds().Width,playerRect[i].GetGlobalBounds().Height*.75f);
+                playerPicBox[i].FillColor = Color.Blue;
+
+
+                }
             }
         }
         public void Draw(RenderTarget target, RenderStates states)
@@ -34,7 +53,12 @@ namespace CityExtreme.Base.PreGame_Menu{
             target.Draw(Title);
             target.Draw(Cancel);
             target.Draw(Start);
-            target.Draw(playerRect[0]);
+            foreach(RectangleShape pr in playerRect){
+                target.Draw(pr);
+            }
+            foreach(RectangleShape ppb in playerPicBox){
+                target.Draw(ppb);
+            }
         }
     }
 }

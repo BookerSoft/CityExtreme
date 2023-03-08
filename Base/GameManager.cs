@@ -7,6 +7,7 @@ namespace CityExtreme.Base{
         public Player[] players;
         public GameManager(int maxplayers){
             players =new Player[maxplayers];
+            
 
         }
     }
