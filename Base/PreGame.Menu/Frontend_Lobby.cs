@@ -8,6 +8,8 @@ namespace CityExtreme.Base.PreGame_Menu{
         Text[] playerNames = new Text[6];
         RectangleShape[] playerRect=new RectangleShape[6];
         RectangleShape[] playerPicBox = new RectangleShape[6];
+        RectangleShape[,] compIconPartSm = new RectangleShape[5,3],compIconPartLg=new RectangleShape[5,3];
+        Text[] OpenSlot = new Text[6];
         Text Title,Cancel,Start;
         public Lobby_FE(ContextSettings cs){
             Title = new Text("Configure "+ Support.b.curobjective+" Session",Support.b.defFont,70);
@@ -20,6 +22,24 @@ namespace CityExtreme.Base.PreGame_Menu{
             playerRect[0].OutlineColor = Color.White;
             playerRect[0].FillColor = Color.Transparent;
             playerRect[0].OutlineThickness = .25f;
+            
+            for(int i=0;i<compIconPartSm.GetLength(0);i++){
+                for(int j=0;j<compIconPartSm.GetLength(1);j++){
+                    if(j==0){
+                        compIconPartSm[i,j] = new RectangleShape(new Vector2f(50,50));
+                        compIconPartLg[i,j] = new RectangleShape(new Vector2f(100,100));
+
+                    }else if(j==1){
+                        compIconPartSm[i,j] = new RectangleShape(new Vector2f(30,30));
+                        compIconPartLg[i,j] = new RectangleShape(new Vector2f(80,80));
+                    }else if(j==2){
+                        compIconPartSm[i,j] = new RectangleShape(new Vector2f(50,20));
+                        compIconPartLg[i,j] = new RectangleShape(new Vector2f(100,20));
+
+                    }
+                }
+            }
+            
             if(Support.b.w != null){
                 Title.Position = new Vector2f(Support.b.w.Size.X/4,0);
                 Cancel.Position = new Vector2f(Support.b.w.Size.X/4,Support.b.w.Size.Y-(Cancel.GetGlobalBounds().Height*2));
@@ -27,11 +47,15 @@ namespace CityExtreme.Base.PreGame_Menu{
                 
                 playerRect[0].Size = new Vector2f(Support.b.w.Size.X/6.15f,Support.b.w.Size.Y/3);
                 playerRect[0].Position = new Vector2f(1,Support.b.w.Size.Y*.25f);
+
                 playerPicBox[0] = new RectangleShape();
                 playerPicBox[0].Position = new Vector2f(playerRect[0].GetGlobalBounds().Left,playerRect[0].GetGlobalBounds().Top);
                 playerPicBox[0].Size = new Vector2f(playerRect[0].GetGlobalBounds().Width,playerRect[0].GetGlobalBounds().Height*.75f);
                 playerPicBox[0].FillColor = Color.Blue;
-
+                playerNames[0] = new Text("NoName",Support.b.defFont,25);
+                playerNames[0].FillColor = Color.White;
+                playerNames[0].Position = new Vector2f(playerRect[0].GetGlobalBounds().Width*.35f,playerRect[0].GetGlobalBounds().Top+playerRect[0].GetGlobalBounds().Height*.80f);
+                float prectwidth = playerRect[0].GetGlobalBounds().Width;
                 for(int i=1;i<playerRect.Length;i++){
                     playerRect[i] = new RectangleShape();
                 playerRect[i].OutlineColor = Color.White;
@@ -43,7 +67,23 @@ namespace CityExtreme.Base.PreGame_Menu{
                 playerPicBox[i].Position = new Vector2f(playerRect[i].GetGlobalBounds().Left,playerRect[i].GetGlobalBounds().Top);
                 playerPicBox[i].Size = new Vector2f(playerRect[i].GetGlobalBounds().Width,playerRect[i].GetGlobalBounds().Height*.75f);
                 playerPicBox[i].FillColor = Color.Blue;
+                playerNames[i] = new Text("NoName",Support.b.defFont,25);
+                playerNames[i].FillColor = Color.White;
+                playerNames[i].Position = new Vector2f((i*prectwidth)+ playerRect[i].GetGlobalBounds().Width*.35f,playerRect[i].GetGlobalBounds().Top+playerRect[i].GetGlobalBounds().Height*.80f);
+                if(i==1){
+                    OpenSlot[i-1] = new Text("O",Support.b.defFont,25);
+                OpenSlot[i-1].Position = new Vector2f(playerRect[i-1].GetGlobalBounds().Left, playerNames[i-1].Position.Y);
+                OpenSlot[i-1].FillColor = Color.White;
+                OpenSlot[i] = new Text("O",Support.b.defFont,25);
+                OpenSlot[i].Position = new Vector2f(playerRect[i].GetGlobalBounds().Left, playerNames[i].Position.Y);
+                OpenSlot[i].FillColor = Color.White;
 
+                }else{
+                    OpenSlot[i] = new Text("O",Support.b.defFont,25);
+                OpenSlot[i].Position = new Vector2f(playerRect[i].GetGlobalBounds().Left, playerNames[i].Position.Y);
+                OpenSlot[i].FillColor = Color.White;
+                }
+                
 
                 }
             }
@@ -58,6 +98,12 @@ namespace CityExtreme.Base.PreGame_Menu{
             }
             foreach(RectangleShape ppb in playerPicBox){
                 target.Draw(ppb);
+            }
+            foreach(Text pn in playerNames){
+                target.Draw(pn);
+            }
+            foreach(Text os in OpenSlot){
+                target.Draw(os);
             }
         }
     }
