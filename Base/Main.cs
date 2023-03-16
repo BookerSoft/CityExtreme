@@ -6,7 +6,7 @@ using SFML.Graphics;
 using SFML.Window;
 namespace CityExtreme.Base{
     public class Base{
-        public int state=0,menu=1,menupg=1,res_w=0,res_h=0,maxplayers=6;
+        public int state=0,menu=0,menupg=0,res_w=0,res_h=0,maxplayers=6;
         public Window w;
         public string curplayer="",curobjective="";
         public string[] objective = new string[8];
@@ -15,7 +15,7 @@ namespace CityExtreme.Base{
         public string[,] ddItemStrings;
         public string[,,] sessDetails = new string[1,10,2];
 
-        public Player[] AiPlayers = new Player[10];
+        public Player[] AiPlayers = new Player[10],HumanPlayers = new Player[100];
         public static bool running=false;
         public bool[][] plForDDin=new bool[10][],plDDSilClicked=new bool[10][];
         public Font defFont;
@@ -24,7 +24,39 @@ namespace CityExtreme.Base{
         public PreGame_Menu.Lobby_FE lobby;
         public VideoMode defMode;
         public Base(){
-            defFont = new Font("C:\\Windows\\Fonts\\Arial.ttf");
+            if(Environment.OSVersion.Platform== PlatformID.Win32NT){
+                if(System.IO.File.Exists("C:\\Users\\"+Environment.UserName+"\\Games\\CityExtreme\\Settings")){
+                string[] lines = System.IO.File.ReadAllLines("C:\\Users\\"+Environment.UserName+"\\Games\\CityExtreme\\Settings");
+                foreach(string s in lines){
+                    if(s.Contains("Resolution :")){
+                        int bpp;
+                        string[] res = s.Split(" :")[1].Split("x");
+                        defMode = new VideoMode(uint.Parse(res[0]),uint.Parse(res[1]),uint.Parse(res[2]));
+                        w =new Window(defMode);  
+                    }
+                }
+            }
+              else  if(!System.IO.Directory.Exists("C:\\Users\\"+Environment.UserName+"\\Games\\CityExtreme")){
+                    Directory.CreateDirectory("C:\\Users\\"+Environment.UserName+"\\Games\\CityExtreme");
+                    
+                    if(res_w==0 && res_h==0 && !System.IO.File.Exists("C:\\Users\\"+Environment.UserName+"\\Games\\CityExtreme\\Settings")){
+                res_h = (int)VideoMode.DesktopMode.Height;
+                res_w = (int)VideoMode.DesktopMode.Width;
+                defMode = new VideoMode((uint) res_w,(uint)res_h,32);
+                System.IO.File.AppendAllText("C:\\Users\\"+Environment.UserName+"\\Games\\CityExtreme\\Settings","City Extreme Settings:"+Environment.NewLine+"Resolution :"+res_w+"x"+res_h+"x32");
+                w=new Window(defMode);
+                
+                
+            } 
+            
+                    
+                }else{
+                   w=new Window(VideoMode.DesktopMode); 
+                }
+
+                defFont = new Font("C:\\Windows\\Fonts\\Arial.ttf");
+            }
+            
             objective[0] = "Total Daily Profit";
             objective[1] = "Average Daily Profit";
             objective[3] = "Highest Cumulative Profit";
@@ -98,16 +130,7 @@ namespace CityExtreme.Base{
                 ddItemStrings[1,a] = "unspecified";
             }
             }
-            if(res_w==0 && res_h==0){
-                res_h = (int)VideoMode.DesktopMode.Height;
-                res_w = (int)VideoMode.DesktopMode.Width;
-                defMode = new VideoMode((uint) res_w,(uint)res_h,32);
-                w=new Window(defMode);
-                
-                
-            }else{
-                w=new Window(VideoMode.DesktopMode);
-            }
+            
 
 
 

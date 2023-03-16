@@ -156,7 +156,9 @@ namespace CityExtreme.Base.Gui{
         {
             DescLabel.Draw(target,states);
             selItemLabel.Draw(target,states);
+            Console.Write(isvisible.ToString());
             if(isvisible == true){
+                Console.Write(Support.b.plDDSilClicked[id][0].ToString()+" "+Support.b.plForDDin[id][0].ToString()+Environment.NewLine);
                switch(Support.b.plDDSilClicked[id][0] && Support.b.plForDDin[id][0]){
                 case true:{
                     ddbacking.Draw(target,states);

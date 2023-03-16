@@ -73,6 +73,10 @@ namespace CityExtreme.Base{
                     PreGame_Menu.PreLobby_FE.MouseClick(sender,e);
                     
                 }
+            }else if(Support.b.state ==0 && Support.b.menu ==1 && Support.b.menupg ==1){
+                if(Support.b.lobby != null){
+                    Support.b.lobby.MouseClick(sender,e);
+                }
             }
 
         }
