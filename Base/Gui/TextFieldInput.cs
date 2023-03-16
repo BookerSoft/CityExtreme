@@ -24,6 +24,10 @@ namespace CityExtreme.Base.Gui{
             inputBegun = false;
             inputEnded= false;
         }
+        public void SetCharSize(uint s){
+            Label.CharacterSize = s;
+            InputField.CharacterSize =s;
+        }
         public void SetInputDisplayedStr(string s){
             InputField.DisplayedString = s;
 
