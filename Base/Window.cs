@@ -7,9 +7,13 @@ namespace CityExtreme.Base{
         public Window(VideoMode m):base(m,"City Extreme",SFML.Window.Styles.Fullscreen,new ContextSettings(32,32,2,3,1,ContextSettings.Attribute.Core,true)){
             MouseButtonPressed += MouseClick;
             MouseMoved += MouseMove;
+            KeyPressed += KeyPress;
         }
 
        public static void MouseMove(object? sender, MouseMoveEventArgs e){
+        if(Support.b.PlayerManDlg !=null && Support.b.state == 0 && Support.b.PlayerManDlg.Visible){
+            Support.b.PlayerManDlg.MouseMove(sender,e);
+        }
         if(Support.b.state == 0 && Support.b.menu ==1 && Support.b.menupg ==0&& Support.b.curobjective == "Total Daily Profit" && Support.b.preLobby.menuDropDowns!=null){
             foreach(Gui.DropDownMenu dd in Support.b.preLobby.menuDropDowns){
                 if(dd!=null ){
@@ -62,11 +66,28 @@ namespace CityExtreme.Base{
             
             
        }
-        
+        public static void KeyPress(object? sender, KeyEventArgs e){    
+            if(Support.b.state == 0){
+                if(e.Control && e.Code == Keyboard.Key.P){
+                    if(Support.b.PlayerManDlg!=null){
+                        if(Support.b.PlayerManDlg.Visible){
+                            Support.b.PlayerManDlg.Visible = false;
+
+                        }else{
+                            Support.b.PlayerManDlg.Visible =true;
+                        }
+                    }
+                }
+            }
+
+        }
         public static void MouseClick(object? sender, MouseButtonEventArgs e){
             if(Support.b.state == 0 && Support.b.menu ==0){
                 if(Support.b.main != null){
                     PreGame_Menu.Main_FE.MouseClick(sender,e);
+                    if(Support.b.PlayerManDlg!=null&&Support.b.PlayerManDlg.Visible){
+                        Support.b.PlayerManDlg.MouseClicked(sender,e);
+                    }
                 }
             }else if(Support.b.state == 0 && Support.b.menu ==1 && Support.b.menupg == 0){
                 if(Support.b.preLobby != null){
@@ -86,6 +107,9 @@ namespace CityExtreme.Base{
                     switch(Support.b.menu){
                         case 0:{
                             Draw(Support.b.main);
+                            if(Support.b.PlayerManDlg.Visible){
+                                Draw(Support.b.PlayerManDlg);
+                            }
                             break;
                         }
                         case 1:{

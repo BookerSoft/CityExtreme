@@ -6,6 +6,16 @@ namespace CityExtreme.Base.Gui{
     public class TextField : Drawable
     {
         FloatRect bounds = new FloatRect();
+        public FloatRect GlobalBounds{
+            get{
+                return bounds;
+            }
+        }
+        public Vector2f Position{
+            get{
+                return new Vector2f(bounds.Left,bounds.Top);
+            }
+        }
         Text Label,InputField;
         bool inMe, inInputField,inputBegun,inputEnded;
 
@@ -24,6 +34,9 @@ namespace CityExtreme.Base.Gui{
             inputBegun = false;
             inputEnded= false;
         }
+        public void SetInputFieldPos(){
+            InputField.Position = new Vector2f(bounds.Left+Label.GetGlobalBounds().Width,bounds.Top);
+        }
         public void SetCharSize(uint s){
             Label.CharacterSize = s;
             InputField.CharacterSize =s;
@@ -35,7 +48,7 @@ namespace CityExtreme.Base.Gui{
         public void MouseMoved(object? sender , MouseMoveEventArgs e){
             if(bounds.Contains((float)e.X,(float)e.Y)){
                 inMe =true;
-                if(InputField.GetGlobalBounds().Contains((float)e.X,e.Y)){
+                if(InputField.GetGlobalBounds().Contains((float)e.X,(float)e.Y)){
                     inInputField =true;
                 }
 

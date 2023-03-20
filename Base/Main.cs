@@ -16,16 +16,20 @@ namespace CityExtreme.Base{
         public string[,,] sessDetails = new string[1,10,2];
 
         public Player[] AiPlayers = new Player[10],HumanPlayers = new Player[100];
+        
         public static bool running=false;
         public bool[][] plForDDin=new bool[10][],plDDSilClicked=new bool[10][];
         public Font defFont;
         public PreGame_Menu.Main_FE main;
         public PreGame_Menu.PreLobby_FE preLobby;
+        public Gui.Dialog.PlayerManagerPopupDlg PlayerManDlg;
+        public string PlManType="FullManager";
         public PreGame_Menu.Lobby_FE lobby;
         public VideoMode defMode;
         public Base(){
             if(Environment.OSVersion.Platform== PlatformID.Win32NT){
                 if(System.IO.File.Exists("C:\\Users\\"+Environment.UserName+"\\Games\\CityExtreme\\Settings")){
+                    
                 string[] lines = System.IO.File.ReadAllLines("C:\\Users\\"+Environment.UserName+"\\Games\\CityExtreme\\Settings");
                 foreach(string s in lines){
                     if(s.Contains("Resolution :")){
@@ -138,6 +142,8 @@ namespace CityExtreme.Base{
         }
         public void initMenus(ContextSettings cs){
             main = new PreGame_Menu.Main_FE(cs);
+            PlayerManDlg = new Gui.Dialog.PlayerManagerPopupDlg(cs);
+
             if(menu == 1 && menupg ==0){
                 preLobby = new PreGame_Menu.PreLobby_FE("local",cs);
 

@@ -13,7 +13,7 @@ namespace CityExtreme.Base.PreGame_Menu{
         public static bool[][] forddin = new bool[10][],issilclicked = new bool[10][];
         
         public static int lastddin =-1,curddin=-1;
-        Gui.TextField SessionName;
+        public Gui.TextField SessionName;
         static PreLobby_FE _self;
         public PreLobby_FE(string type, ContextSettings? cs){
             //Global Titles for Sections
@@ -49,6 +49,8 @@ namespace CityExtreme.Base.PreGame_Menu{
                         gameSetTitle.Position = new Vector2f(Support.b.w.Size.X - (gameSetTitle.GetGlobalBounds().Width*2)+100,Title.GetGlobalBounds().Height+10);
                         SessionName = new Gui.TextField("Session Name",new Vector2f(gameSetTitle.Position.X,gameSetTitle.Position.Y + gameSetTitle.GetGlobalBounds().Height+10));
                         SessionName.SetInputDisplayedStr("New Game");
+                        SessionName.SetCharSize(65);
+                        SessionName.SetInputFieldPos();
                         sessNameLabel.Position = new Vector2f(gameSetTitle.Position.X,gameSetTitle.Position.Y + gameSetTitle.GetGlobalBounds().Height+10);
                         sessNameText.Position = new Vector2f(sessNameLabel.Position.X + sessNameLabel.GetGlobalBounds().Width + 10,sessNameLabel.Position.Y+sessNameLabel.GetGlobalBounds().Height+10);
                         menuDropDowns = new Gui.DropDownMenu[Support.b.ddItemStrings.GetLongLength(0)];
@@ -101,7 +103,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                             tmp[i] = Support.b.ddItemStrings[0,i];
 
                         }
-                        menuDropDowns[0] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(sessNameLabel.Position.X,sessNameLabel.Position.Y+sessNameLabel.GetGlobalBounds().Height+sessNameText.GetGlobalBounds().Height+10),Support.b.objSettings[0,0,0],tmp,0);
+                        menuDropDowns[0] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(SessionName.Position.X,SessionName.Position.Y+SessionName.GlobalBounds.Height+sessNameText.GetGlobalBounds().Height+40),Support.b.objSettings[0,0,0],tmp,0);
                         if(Support.b.plDDSilClicked[0] == null || Support.b.plForDDin[0] ==null)
                         menuDropDowns[0].setNoOfBools();
 
@@ -113,7 +115,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                         }
                         menuDropDowns[1] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(sessNameLabel.Position.X,menuDropDowns[0].backing.Position.Y+menuDropDowns[0].backing.GetGlobalBounds().Height+10),Support.b.objSettings[0,1,0],tmp,1);
                         if(Support.b.plDDSilClicked[1] == null || Support.b.plForDDin[1] ==null)
-                        menuDropDowns[1].setNoOfBools();
+                        menuDropDowns[1].setNoOfBools(); 
                         for(int a =0;a<menuDropDowns.Length;a++){
                             if((a==lastddin && menuDropDowns[a]!=null)||menuDropDowns[a]!=null){
                                 if(Support.b.plDDSilClicked[a][0] == true){
