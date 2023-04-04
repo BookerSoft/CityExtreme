@@ -85,6 +85,15 @@ namespace CityExtreme.Base.Gui.Dialog{
             }
 
         }
+        public void MouseWheelScrolled(object? sender, MouseWheelScrollEventArgs e){
+            if(inMe){
+                if(e.Delta>0 && curnamepg<namepgs){
+                    curnamepg++;
+                }else if(e.Delta<0 && curnamepg>0 && curnamepg<namepgs){
+                    curnamepg--;
+                }
+            }
+        }
         public void TextEvent(object? sender, TextEventArgs e){
             if(inMe){
                 

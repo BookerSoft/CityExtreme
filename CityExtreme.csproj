@@ -11,5 +11,6 @@
     <PackageReference Include="csfml" Version="2.5.1" />
     <PackageReference Include="SFML.Net" Version="2.5.0" />
     <Content Include="images\pclg.png" />
+    
   </ItemGroup>
 </Project>

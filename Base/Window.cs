@@ -8,6 +8,8 @@ namespace CityExtreme.Base{
             MouseButtonPressed += MouseClick;
             MouseMoved += MouseMove;
             KeyPressed += KeyPress;
+            MouseWheelScrolled += MouseWheelScroll;
+
         }
 
        public static void MouseMove(object? sender, MouseMoveEventArgs e){
@@ -17,7 +19,7 @@ namespace CityExtreme.Base{
         if(Support.b.state == 0 && Support.b.menu ==1 && Support.b.menupg ==0&& Support.b.curobjective == "Total Daily Profit" && Support.b.preLobby.menuDropDowns!=null){
             foreach(Gui.DropDownMenu dd in Support.b.preLobby.menuDropDowns){
                 if(dd!=null ){
-                    if( !((IntRect)dd.backing.GetGlobalBounds()).Contains(e.X,e.Y) && !((IntRect)dd.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y)){
+                    if( !((IntRect)dd.backing.GetGlobalBounds()).Contains(e.X,e.Y) && !((IntRect)dd.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y) && !((IntRect)dd.ddbacking.GetGlobalBounds()).Contains(e.X,e.Y)){
                             for(int i =0;i<Support.b.plForDDin[dd.id].Length;i++){
                             if(i<2)
                             Support.b.plForDDin[dd.id][i]=false;
@@ -25,7 +27,9 @@ namespace CityExtreme.Base{
                                 Support.b.plForDDin[dd.id][i] =false;
                             }
                             }
-                            }else if( ((IntRect)dd.backing.GetGlobalBounds()).Contains(e.X,e.Y) && ((IntRect)dd.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y)){
+                            
+                        }
+                        else if( ((IntRect)dd.backing.GetGlobalBounds()).Contains(e.X,e.Y) && ((IntRect)dd.selItemLabel.GetGlobalBounds()).Contains(e.X,e.Y) && !((IntRect)dd.ddbacking.GetGlobalBounds()).Contains(e.X,e.Y)){
                         PreGame_Menu.PreLobby_FE.curddin = dd.id;
                         Console.WriteLine(PreGame_Menu.PreLobby_FE.curddin.ToString());
                         
@@ -49,7 +53,18 @@ namespace CityExtreme.Base{
                            
                         }  
                             
-                        }  
+                        }else if(((IntRect)dd.ddbacking.GetGlobalBounds()).Contains(e.X,e.Y)){
+                            PreGame_Menu.PreLobby_FE.curddin =dd.id;
+                            for(int i =0;i<Support.b.plForDDin[PreGame_Menu.PreLobby_FE.lastddin].Length;i++){
+                                if(dd.id == PreGame_Menu.PreLobby_FE.lastddin &&i<3){
+                                    
+                                    Support.b.plForDDin[dd.id][i] =true;
+                                }else{
+                                    Support.b.plForDDin[dd.id][i] = false;
+                                }
+                            }
+                            }
+                        
                     }else{
                          
                     }
@@ -65,6 +80,19 @@ namespace CityExtreme.Base{
         }            
             
             
+       }
+       public void MouseWheelScroll(object? sender, MouseWheelScrollEventArgs e){
+        if(Support.b.state == 0){
+            if(Support.b.PlayerManDlg != null){
+                if(Support.b.PlayerManDlg.Visible){
+                    Support.b.PlayerManDlg.MouseWheelScrolled(sender,e);
+                }
+            }if(Support.b.preLobby !=null && ((Support.b.menu ==1&&Support.b.menupg ==0) || (Support.b.menu ==2&&Support.b.menupg==1))){
+                Support.b.preLobby.MouseWheelScrolled(sender,e);
+
+            }
+        }
+
        }
         public static void KeyPress(object? sender, KeyEventArgs e){    
             if(Support.b.state == 0){
@@ -120,8 +148,10 @@ namespace CityExtreme.Base{
                                 else{
                                     switch(Support.b.curobjective){
                                         case "Total Daily Profit":{
-                                            
+                                            if(Support.b.preLobby.menuDropDowns !=null && PreGame_Menu.PreLobby_FE.curddin>=0 &&Support.b.plForDDin[PreGame_Menu.PreLobby_FE.curddin][2])
                                                 Draw(Support.b.preLobby);
+                                            else
+                                            Draw(Support.b.preLobby);    
                                             
                                             break;
                                         }

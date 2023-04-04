@@ -142,15 +142,23 @@ namespace CityExtreme.Base.Gui{
             }
         }
         
-        public static void wheelMoved(object? sender, MouseWheelScrollEventArgs e){
-            if(e.Wheel == Mouse.Wheel.VerticalWheel){
-                if(e.Delta < 0 && _self.curpg>0 && _self.curpg<=_self.pgcnt-1){
-                    _self.curpg--;
-                }else if(e.Delta >0 && _self.curpg>=0 && _self.curpg<=_self.pgcnt-1){
-                    _self.curpg++;
+        public void wheelMoved(object? sender, MouseWheelScrollEventArgs e){
+            int l_curpg = curpg;
+            Support.b.plForDDin[id][2] =true;
+
+            if( Support.b.plForDDin[id][2] ==true && Support.b.plDDSilClicked[id][0]){
+                if(e.Delta <0 && l_curpg>=0 && l_curpg<pgcnt){
+                   l_curpg++;
+                    System.IO.File.AppendAllText(MainClass.Approot+"\\dd_curpg.log",l_curpg.ToString()+Environment.NewLine);
+                }
+                else if(e.Delta > 0 && l_curpg>0 && l_curpg<=pgcnt-1){
+                    l_curpg--;
+                    System.IO.File.AppendAllText(MainClass.Approot+"\\dd_curpg.log",l_curpg.ToString()+Environment.NewLine);
                 }
                 
             }
+            curpg = l_curpg;
+            PreGame_Menu.PreLobby_FE.ddlastpg = curpg;
         } 
         public void Draw(RenderTarget target, RenderStates states)
         {
@@ -159,18 +167,26 @@ namespace CityExtreme.Base.Gui{
             Console.Write(isvisible.ToString());
             if(isvisible == true){
                 Console.Write(Support.b.plDDSilClicked[id][0].ToString()+" "+Support.b.plForDDin[id][0].ToString()+Environment.NewLine);
-               switch(Support.b.plDDSilClicked[id][0] && Support.b.plForDDin[id][0]){
+               switch(Support.b.plDDSilClicked[id][0] && Support.b.plForDDin[id][0]&&Support.b.plForDDin[id][1]){
                 case true:{
                     ddbacking.Draw(target,states);
-                for(int a=0;a<pgcnt;a++){
-                    if(curpg>=0 && a==curpg){
-                        for(int b=(a*perpg);b<(a+1)*perpg;b++){
+                
+                    if(PreGame_Menu.PreLobby_FE.ddlastpg>=0){
+                        for(int b=(PreGame_Menu.PreLobby_FE.ddlastpg*perpg);b<((PreGame_Menu.PreLobby_FE.ddlastpg+1)*perpg);b++){
+                            if(PreGame_Menu.PreLobby_FE.lastddin==id)
+                            Support.b.plForDDin[id][2] =true;
+                            
+                            
+                            if(Support.b.plForDDin[id][2] && b<ddItems.Length)
+                            ddItems[b].Draw(target,states);
+                            else if(b<ddItems.Length)
                             ddItems[b].Draw(target,states);
                         }
                     }
-                }
+                
                     break;
                 }
+
 
                }
 

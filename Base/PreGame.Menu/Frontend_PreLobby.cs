@@ -12,7 +12,7 @@ namespace CityExtreme.Base.PreGame_Menu{
         public static bool[] menuDDVisible;
         public static bool[][] forddin = new bool[10][],issilclicked = new bool[10][];
         
-        public static int lastddin =-1,curddin=-1;
+        public static int lastddin =-1,curddin=-1,ddlastpg=0;
         public Gui.TextField SessionName;
         static PreLobby_FE _self;
         public PreLobby_FE(string type, ContextSettings? cs){
@@ -96,7 +96,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                         objButton[i].FillColor = Color.White;
                     }
                 }
-            if(Support.b.curobjective == "Total Daily Profit"){
+            if(Support.b.curobjective == "Total Daily Profit" && Support.b.curobjective!=Support.b.lastobjective){
                 
                 string[] tmp = new string[Support.b.ddItemStrings.GetLongLength(1)];
                         for(int i=0;i<Support.b.ddItemStrings.GetLongLength(1);i++){
@@ -113,7 +113,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                             tmp[i] = Support.b.ddItemStrings[1,i];
 
                         }
-                        menuDropDowns[1] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(sessNameLabel.Position.X,menuDropDowns[0].backing.Position.Y+menuDropDowns[0].backing.GetGlobalBounds().Height+10),Support.b.objSettings[0,1,0],tmp,1);
+                        menuDropDowns[1] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(sessNameLabel.Position.X+menuDropDowns[0].backing.Size.X + menuDropDowns[0].ddbacking.Size.X + 10,menuDropDowns[0].backing.Position.Y+menuDropDowns[0].backing.GetGlobalBounds().Height+10),Support.b.objSettings[0,1,0],tmp,1);
                         if(Support.b.plDDSilClicked[1] == null || Support.b.plForDDin[1] ==null)
                         menuDropDowns[1].setNoOfBools(); 
                         for(int a =0;a<menuDropDowns.Length;a++){
@@ -136,7 +136,11 @@ namespace CityExtreme.Base.PreGame_Menu{
                                         }
                                     }
                                     if(a==lastddin)
-                                    menuDropDowns[a].isvisible =true;
+                                    {
+                                        menuDropDowns[a].isvisible =true;
+                                        if(ddlastpg != menuDropDowns[a].curpg)
+                                        menuDropDowns[a].curpg = ddlastpg;
+                                    }
                                     else
                                     menuDropDowns[a].isvisible =false;
                                 }
@@ -153,6 +157,7 @@ namespace CityExtreme.Base.PreGame_Menu{
             for(int i =0;i<_self.objButton.Length;i++){
                         if(_self.objButton[i].GetGlobalBounds().Contains(Mouse.GetPosition().X,Mouse.GetPosition().Y)){
                             _self.objButton[i].FillColor = Color.Green;
+                            Support.b.lastobjective = Support.b.curobjective;
                             Support.b.curobjective = _self.objButton[i].DisplayedString;
                             Support.b.objSelected[i] = true;
                             _self.initandPositionDropdowns();
@@ -163,6 +168,15 @@ namespace CityExtreme.Base.PreGame_Menu{
                         }
 
                     }
+        }
+        public void MouseWheelScrolled(object? sender,MouseWheelScrollEventArgs e){
+            if(menuDropDowns!=null){
+                
+                    if(menuDropDowns[lastddin] != null ){
+                        menuDropDowns[lastddin].wheelMoved(sender,e);
+                    }
+                
+            }
         }
         public static void MouseClick(object? sender, MouseButtonEventArgs e){
             switch(e.Button){

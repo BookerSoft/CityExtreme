@@ -8,7 +8,7 @@ namespace CityExtreme.Base{
     public class Base{
         public int state=0,menu=0,menupg=0,res_w=0,res_h=0,maxplayers=6;
         public Window w;
-        public string curplayer="",curobjective="";
+        public string curplayer="",curobjective="",lastobjective="";
         public string[] objective = new string[8];
         public bool[] objSelected = new bool[8];
         public string[,,] objSettings = new string[8,10,2];
