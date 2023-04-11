@@ -9,6 +9,7 @@
                 "build",
                 "${workspaceFolder}/CityExtreme.csproj",
                 "/property:GenerateFullPaths=true",
+                "/property:CSFMLIgnoreAnyCPU=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"

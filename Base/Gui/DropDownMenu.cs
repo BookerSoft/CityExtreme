@@ -143,15 +143,19 @@ namespace CityExtreme.Base.Gui{
         }
         
         public void wheelMoved(object? sender, MouseWheelScrollEventArgs e){
-            int l_curpg = curpg;
+            int l_curpg = PreGame_Menu.PreLobby_FE.ddlastpg;
+            int l_pgcnt = ddItems.Length/perpg;
             Support.b.plForDDin[id][2] =true;
 
             if( Support.b.plForDDin[id][2] ==true && Support.b.plDDSilClicked[id][0]){
-                if(e.Delta <0 && l_curpg>=0 && l_curpg<pgcnt){
+                if((l_curpg>=0 && l_curpg<=(l_pgcnt-1)) && e.Delta <0){
+                   if(l_curpg==(l_pgcnt-1)){
+
+                   }else
                    l_curpg++;
                     System.IO.File.AppendAllText(MainClass.Approot+"\\dd_curpg.log",l_curpg.ToString()+Environment.NewLine);
                 }
-                else if(e.Delta > 0 && l_curpg>0 && l_curpg<=pgcnt-1){
+                else if((l_curpg>0 && l_curpg<=l_pgcnt-1) && e.Delta > 0){
                     l_curpg--;
                     System.IO.File.AppendAllText(MainClass.Approot+"\\dd_curpg.log",l_curpg.ToString()+Environment.NewLine);
                 }
