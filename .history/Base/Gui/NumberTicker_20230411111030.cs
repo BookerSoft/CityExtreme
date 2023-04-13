@@ -13,8 +13,8 @@ namespace CityExtreme.Base.Gui{
         Text desclabel,numlabel;
         CircleShape minuscir,pluscir,cstepcir;
 
-        RectangleShape minus,plus_v,plus_h,bar;
-        public int? min,max,steps,step,stepamt,id,cstepciroffset;
+        RectangleShape minue,plus_v,plus_h,bar;
+        public int? min,max,steps,stepamt,id;
         public double? d_min,d_max,d_steps,d_stepamt;
         public NumTicker(Vector2f pos,int _min,int _max,int _stepamt, string desc, int _id){
             bounds = new IntRect((Vector2i)pos,new Vector2i(300,100));
@@ -29,16 +29,9 @@ namespace CityExtreme.Base.Gui{
             minuscir = new CircleShape(10,10);
             minuscir.Position = new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20,desclabel.Position.Y);
             minuscir.FillColor = Color.Blue;
-            minus = new RectangleShape(); 
-            minus.Position = new Vector2f(minuscir.GetGlobalBounds().Left+20,(minuscir.GetGlobalBounds().Height*.4f));
-            minus.FillColor = Color.White;
-            minus.Size = new Vector2f((minuscir.GetGlobalBounds().Width*.8f)-minus.Position.X,minuscir.GetGlobalBounds().Height*.1f);
             bar=new RectangleShape();
             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);
             bar.Size = new Vector2f(150,20);
-            cstepcir = new CircleShape(10,10);
-            cstepciroffset = 150*(1/steps);
-            cstepcir.Origin= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); 
         }
         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){
 
@@ -47,11 +40,7 @@ namespace CityExtreme.Base.Gui{
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            target.Draw(desclabel);
-            target.Draw(minuscir);
-            target.Draw(minus);
-            target.Draw(bar);
-            target.Draw(cstepcir);
+            throw new NotImplementedException();
         }
     }
 }

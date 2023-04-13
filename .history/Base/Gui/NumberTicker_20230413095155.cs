@@ -49,9 +49,6 @@ namespace CityExtreme.Base.Gui{
         {
             target.Draw(desclabel);
             target.Draw(minuscir);
-            target.Draw(minus);
-            target.Draw(bar);
-            target.Draw(cstepcir);
         }
     }
 }
