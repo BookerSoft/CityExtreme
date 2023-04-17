@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 22,
             "patches": [
                 {
                     "date": 1681229430210,
@@ -16,6 +16,86 @@
                 {
                     "date": 1681397698946,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,7 +48,10 @@\n         public void Draw(RenderTarget target, RenderStates states)\r\n         {\r\n             target.Draw(desclabel);\r\n             target.Draw(minuscir);\r\n+            target.Draw(minus);\r\n+            target.Draw(bar);\r\n+            target.Draw(cstepcir);\r\n         }\r\n     }\r\n }\r\n"
+                },
+                {
+                    "date": 1681692828558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            cstepcir.Origin= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n+            cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n         }\r\n"
+                },
+                {
+                    "date": 1681692954573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n+            \r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693233455,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            \r\n+        \r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693239462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-        \r\n+            step=\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693651168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,10 @@\n             id=_id;\r\n             min = _min;\r\n             max=_max;\r\n             stepamt =_stepamt;\r\n-            steps = max/stepamt;\r\n+            steps = \r\n+            9max/stepamt;\r\n             desclabel.Position = new Vector2f((float)bounds.Left,(float)bounds.Top);\r\n             minuscir = new CircleShape(10,10);\r\n             minuscir.Position = new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20,desclabel.Position.Y);\r\n             minuscir.FillColor = Color.Blue;\r\n"
+                },
+                {
+                    "date": 1681693657706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,10 +23,9 @@\n             id=_id;\r\n             min = _min;\r\n             max=_max;\r\n             stepamt =_stepamt;\r\n-            steps = \r\n-            9max/stepamt;\r\n+            steps = (max/stepamt;\r\n             desclabel.Position = new Vector2f((float)bounds.Left,(float)bounds.Top);\r\n             minuscir = new CircleShape(10,10);\r\n             minuscir.Position = new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20,desclabel.Position.Y);\r\n             minuscir.FillColor = Color.Blue;\r\n"
+                },
+                {
+                    "date": 1681693664274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n             id=_id;\r\n             min = _min;\r\n             max=_max;\r\n             stepamt =_stepamt;\r\n-            steps = (max/stepamt;\r\n+            steps = (max-min)/stepamt;\r\n             desclabel.Position = new Vector2f((float)bounds.Left,(float)bounds.Top);\r\n             minuscir = new CircleShape(10,10);\r\n             minuscir.Position = new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20,desclabel.Position.Y);\r\n             minuscir.FillColor = Color.Blue;\r\n"
+                },
+                {
+                    "date": 1681693791187,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            step=\r\n+            step=ma\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693796286,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            step=ma\r\n+            step=(max)\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693803892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            step=(max)\r\n+            step=((max)\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693810924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            step=((max)\r\n+            step=((max-min))\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693818227,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            step=((max-min))\r\n+            step=((max-min)/)\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693896804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            step=((max-min)/)\r\n+            step=((max-min)/s)\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693903573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            step=((max-min)/s)\r\n+            step=((max-min)/step)\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693912137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            step=((max-min)/step)\r\n+            step=((max-min)/steps*ste)\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693928154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            step=((max-min)/steps*ste)\r\n+            step=((max-min)/(steps*stepamt)\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693944097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,10 @@\n             bar.Position =new Vector2f(desclabel.Position.X+desclabel.GetGlobalBounds().Width+20+minuscir.GetGlobalBounds().Width,minuscir.GetGlobalBounds().Height/2);\r\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n-            step=((max-min)/(steps*stepamt)\r\n+            step=((max-min)/(steps*stepamt));\r\n+            cstepcir\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693949612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n             step=((max-min)/(steps*stepamt));\r\n-            cstepcir\r\n+            cstepcir,FillColor=\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681693956314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n             step=((max-min)/(steps*stepamt));\r\n-            cstepcir,FillColor=\r\n+            cstepcir,FillColor=Color.Black\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
+                },
+                {
+                    "date": 1681694108566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             bar.Size = new Vector2f(150,20);\r\n             cstepcir = new CircleShape(10,10);\r\n             cstepciroffset = 150*(1/steps);\r\n             step=((max-min)/(steps*stepamt));\r\n-            cstepcir,FillColor=Color.Black\r\n+            cstepcir.FillColor=Color.Blue;\r\n             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.Position.Y + (bar.GetGlobalBounds().Height/2)); \r\n         }\r\n         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){\r\n \r\n"
                 }
             ],
             "date": 1681229430210,

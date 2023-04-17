@@ -8,7 +8,7 @@ namespace CityExtreme.Base.PreGame_Menu{
         public Text Title,objTitle,gameSetTitle,selMapTitle,ScenDescTitle,sessNameLabel,sessNameText;
         public Text[] objButton = new Text[Support.b.objective.Length];
         public Gui.DropDownMenu[] menuDropDowns; 
-        
+        public Gui.NumTicker[]  menuNumtickers =new Gui.NumTicker[2];
         public static bool[] menuDDVisible;
         public static bool[][] forddin = new bool[10][],issilclicked = new bool[10][];
         
@@ -17,16 +17,16 @@ namespace CityExtreme.Base.PreGame_Menu{
         static PreLobby_FE _self;
         public PreLobby_FE(string type, ContextSettings? cs){
             //Global Titles for Sections
-            objTitle = new Text("Select Objective",Support.b.defFont,65);
-            gameSetTitle = new Text("Configure Session Settings",Support.b.defFont,65);
-            selMapTitle = new Text("Select Game Map",Support.b.defFont, 65);
-            ScenDescTitle = new Text("Objective Description",Support.b.defFont,65);
+            objTitle = new Text("Select Objective",Support.b.defFont,45);
+            gameSetTitle = new Text("Configure Session Settings",Support.b.defFont,45);
+            selMapTitle = new Text("Select Game Map",Support.b.defFont, 45);
+            ScenDescTitle = new Text("Objective Description",Support.b.defFont,45);
             objTitle.FillColor = Color.White;
             gameSetTitle.FillColor = Color.White;
             selMapTitle.FillColor = Color.White;
             ScenDescTitle.FillColor = Color.White;
             for(int i=0;i<Support.b.objective.Length;i++){
-                objButton[i] = new Text(Support.b.objective[i],Support.b.defFont,45);
+                objButton[i] = new Text(Support.b.objective[i],Support.b.defFont,25);
                 objButton[i].FillColor = Color.White;
              }
              sessNameLabel = new Text("Session Name",Support.b.defFont,30);
@@ -38,7 +38,7 @@ namespace CityExtreme.Base.PreGame_Menu{
             //End Section
             switch(type){
                 case "local":{
-                    Title = new Text(" Configure Local Session",Support.b.defFont,85);
+                    Title = new Text(" Configure Local Session",Support.b.defFont,65);
                     sessNameLabel = new Text("Session Name: ",Support.b.defFont,30);
                     
 
@@ -113,7 +113,11 @@ namespace CityExtreme.Base.PreGame_Menu{
                             tmp[i] = Support.b.ddItemStrings[1,i];
 
                         }
+                        
+                         
                         menuDropDowns[1] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(sessNameLabel.Position.X+menuDropDowns[0].backing.Size.X + menuDropDowns[0].ddbacking.Size.X + 10,menuDropDowns[0].backing.Position.Y+menuDropDowns[0].backing.GetGlobalBounds().Height+10),Support.b.objSettings[0,1,0],tmp,1);
+                        int m =int.Parse(Support.b.objSettings[0,2,1]);
+                                              menuNumtickers[0] = new Gui.NumTicker(new Vector2f(menuDropDowns[0].backing.Position.X,menuDropDowns[0].backing.Position.Y +menuDropDowns[0].backing.GetGlobalBounds().Height+100),m,30000,1000,Support.b.objSettings[0,2,0],0);
                         if(Support.b.plDDSilClicked[1] == null || Support.b.plForDDin[1] ==null)
                         menuDropDowns[1].setNoOfBools(); 
                         for(int a =0;a<menuDropDowns.Length;a++){
@@ -306,6 +310,8 @@ namespace CityExtreme.Base.PreGame_Menu{
                             
                 }
 
+                target.Draw(menuNumtickers[0]);
+
             }
                     
                 
@@ -315,6 +321,7 @@ namespace CityExtreme.Base.PreGame_Menu{
             //sessNameLabel.Draw(target,states);
             //sessNameText.Draw(target,states);
             target.Draw(SessionName);
+            
         }
     }
 }
