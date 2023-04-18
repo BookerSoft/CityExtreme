@@ -115,7 +115,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                         }
                         
                          
-                        menuDropDowns[1] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(sessNameLabel.Position.X+menuDropDowns[0].backing.Size.X + menuDropDowns[0].ddbacking.Size.X + 10,menuDropDowns[0].backing.Position.Y+menuDropDowns[0].backing.GetGlobalBounds().Height+10),Support.b.objSettings[0,1,0],tmp,1);
+                        menuDropDowns[1] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(sessNameLabel.Position.X,menuDropDowns[0].backing.Position.Y+menuDropDowns[0].backing.GetGlobalBounds().Height+10),Support.b.objSettings[0,1,0],tmp,1);
                         int m =int.Parse(Support.b.objSettings[0,2,1]);
                                               menuNumtickers[0] = new Gui.NumTicker(new Vector2f(menuDropDowns[0].backing.Position.X,menuDropDowns[0].backing.Position.Y +menuDropDowns[0].backing.GetGlobalBounds().Height+100),m,30000,1000,Support.b.objSettings[0,2,0],0);
                         if(Support.b.plDDSilClicked[1] == null || Support.b.plForDDin[1] ==null)

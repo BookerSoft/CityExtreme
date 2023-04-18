@@ -55,13 +55,16 @@ namespace CityExtreme.Base{
                             
                         }else if(((IntRect)dd.ddbacking.GetGlobalBounds()).Contains(e.X,e.Y)){
                             PreGame_Menu.PreLobby_FE.curddin =dd.id;
-                            for(int i =0;i<Support.b.plForDDin[PreGame_Menu.PreLobby_FE.lastddin].Length;i++){
-                                if(dd.id == PreGame_Menu.PreLobby_FE.lastddin &&i<3){
+                            if(PreGame_Menu.PreLobby_FE.lastddin>0)
+                            {    
+                                for(int i =0;i<Support.b.plForDDin[PreGame_Menu.PreLobby_FE.lastddin].Length;i++){
+                                    if(dd.id == PreGame_Menu.PreLobby_FE.lastddin &&i<3){
                                     
-                                    Support.b.plForDDin[dd.id][i] =true;
-                                }else{
+                                        Support.b.plForDDin[dd.id][i] =true;
+                                     }else{
                                     Support.b.plForDDin[dd.id][i] = false;
                                 }
+                            }
                             }
                             }
                         

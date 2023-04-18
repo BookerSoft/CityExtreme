@@ -3,11 +3,55 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1681229335566,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1681835555322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n {\r\n     \"local-history.daysLimit\": 0,\r\n-    \"local-history.browser.descending\": false\r\n+    \"local-history.browser.descending\": true,\r\n+    \"files.exclude\": {\r\n+        \"**/.lh\": true\r\n+    }\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1681835572370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n {\r\n     \"local-history.daysLimit\": 0,\r\n     \"local-history.browser.descending\": true,\r\n     \"files.exclude\": {\r\n+        \"**/.history\": true,\r\n         \"**/.lh\": true\r\n     }\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1681836036468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,7 @@\n     \"local-history.browser.descending\": true,\r\n     \"files.exclude\": {\r\n         \"**/.history\": true,\r\n         \"**/.lh\": true\r\n-    }\r\n+    },\r\n+    \"csproj.excludeRegex\": \"\"\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1681836049195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,6 @@\n     \"files.exclude\": {\r\n         \"**/.history\": true,\r\n         \"**/.lh\": true\r\n     },\r\n-    \"csproj.excludeRegex\": \"\"\r\n+    \"csproj.excludeRegex\": \"**/\"\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1681836054414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,6 @@\n     \"files.exclude\": {\r\n         \"**/.history\": true,\r\n         \"**/.lh\": true\r\n     },\r\n-    \"csproj.excludeRegex\": \"**/\"\r\n+    \"csproj.excludeRegex\": \"**\\.lh\"\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1681836063048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,6 @@\n     \"files.exclude\": {\r\n         \"**/.history\": true,\r\n         \"**/.lh\": true\r\n     },\r\n-    \"csproj.excludeRegex\": \"**\\.lh\"\r\n+    \"csproj.excludeRegex\": \"\\.lh\"\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1681836077439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,7 @@\n     \"files.exclude\": {\r\n         \"**/.history\": true,\r\n         \"**/.lh\": true\r\n     },\r\n-    \"csproj.excludeRegex\": \"\\.lh\"\r\n+    \"csproj.excludeRegex\": \"**\\\\.lh\"\r\n+    \r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1681836085319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,6 @@\n         \"**/.history\": true,\r\n         \"**/.lh\": true\r\n     },\r\n     \"csproj.excludeRegex\": \"**\\\\.lh\"\r\n-    \r\n+    \"csproj.excludeRegex\": \"**\\\\.\"\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1681836099920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,6 @@\n         \"**/.history\": true,\r\n         \"**/.lh\": true\r\n     },\r\n     \"csproj.excludeRegex\": \"**\\\\.lh\"\r\n-    \"csproj.excludeRegex\": \"**\\\\.\"\r\n+    \r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1681836106030,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,7 @@\n     \"files.exclude\": {\r\n         \"**/.history\": true,\r\n         \"**/.lh\": true\r\n     },\r\n-    \"csproj.excludeRegex\": \"**\\\\.lh\"\r\n+    \"csproj.excludeRegex\": \"**\\\\.lh,**\\\"\r\n     \r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1681836121922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,7 @@\n     \"files.exclude\": {\r\n         \"**/.history\": true,\r\n         \"**/.lh\": true\r\n     },\r\n-    \"csproj.excludeRegex\": \"**\\\\.lh,**\\\"\r\n+    \"csproj.excludeRegex\": \"**\\\\.lh,**\\\\.history\"\r\n     \r\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1681229335566,
