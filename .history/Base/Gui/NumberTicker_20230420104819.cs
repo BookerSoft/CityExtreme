@@ -40,7 +40,6 @@ namespace CityExtreme.Base.Gui{
             cstepcir = new CircleShape(12,12);
             cstepciroffset = 150*(1/steps);
             step=((max-min)/(steps*stepamt));
-            Console.Write("sTEP:"+step.ToString()+Environment.NewLine);
             cstepcir.FillColor=Color.Blue;
             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.GetGlobalBounds().Top - 7 );
             pluscir = new CircleShape(20,20);
@@ -48,7 +47,7 @@ namespace CityExtreme.Base.Gui{
             pluscir.FillColor = Color.Blue;
             plus_h = new RectangleShape();
             plus_h.Position= new Vector2f(pluscir.GetGlobalBounds().Left + (pluscir.GetGlobalBounds().Width *.2f),pluscir.GetGlobalBounds().Top+(pluscir.GetGlobalBounds().Height*.5f));
-            plus_h.Size = new Vector2f((pluscir.GetGlobalBounds().Width*.8f)-(pluscir.GetGlobalBounds().Width*.2f),(pluscir.GetGlobalBounds().Height*.1f));
+            plus_h.Size = new Vector2f((pluscir.GetGlobalBounds().Width*.8f)-(pluscir.GetGlobalBounds().Width*.2f),pluscir.GetGlobalBounds().Top+(pluscir.GetGlobalBounds().Height*.1f));
 
 
         }
