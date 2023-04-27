@@ -123,6 +123,7 @@ namespace CityExtreme.Base{
             }else if(Support.b.state == 0 && Support.b.menu ==1 && Support.b.menupg == 0){
                 if(Support.b.preLobby != null){
                     PreGame_Menu.PreLobby_FE.MouseClick(sender,e);
+
                     
                 }
             }else if(Support.b.state ==0 && Support.b.menu ==1 && Support.b.menupg ==1){
@@ -155,7 +156,15 @@ namespace CityExtreme.Base{
                                                 Draw(Support.b.preLobby);
                                             else
                                             Draw(Support.b.preLobby);    
-                                            
+                                            if(Support.b.preLobby.menuNumtickers !=null){
+                                                foreach(Gui.NumTicker nt in Support.b.preLobby.menuNumtickers){
+                                                    if(nt != null && Gui.NumTicker.numlblupdneeded){
+                                                        Draw(Support.b.preLobby);
+                                                    }else{
+                                                        Draw(Support.b.preLobby);
+                                                    }
+                                                }
+                                            }
                                             break;
                                         }
                                     }

@@ -11,17 +11,11 @@ namespace CityExtreme.Base.Gui{
             }
         }
         Text desclabel,numlabel;
-        public Text NumLabel{
-            get{
-                return numlabel;
-            }
-        }
         CircleShape minuscir,pluscir,cstepcir;
 
         RectangleShape minus,plus_v,plus_h,bar;
         public int? min,max,steps,step,stepamt,id,cstepciroffset;
         public double? d_min,d_max,d_steps,d_stepamt;
-        public static bool isIntTicker,isDoubleTicker,numlblupdneeded=false,inccstep=false,deccstep=false;
         public NumTicker(Vector2f pos,int _min,int _max,int _stepamt, string desc, int _id){
             bounds = new IntRect((Vector2i)pos,new Vector2i(300,100));
             numlabel = new Text(_min.ToString(),Support.b.defFont,25);
@@ -46,7 +40,6 @@ namespace CityExtreme.Base.Gui{
             cstepcir = new CircleShape(12,12);
             cstepciroffset = 150*(1/steps);
             step=((max-min)/(steps*stepamt));
-            PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]=(int)step;
             Console.Write("sTEP:"+step.ToString()+Environment.NewLine);
             cstepcir.FillColor=Color.Blue;
             cstepcir.Position= new Vector2f(bar.Position.X+((float)step*(float)cstepciroffset),bar.GetGlobalBounds().Top - 7 );
@@ -60,47 +53,9 @@ namespace CityExtreme.Base.Gui{
             plus_v.Position = new Vector2f(pluscir.GetGlobalBounds().Left+(pluscir.GetGlobalBounds().Width*.4f),pluscir.GetGlobalBounds().Top+(pluscir.GetGlobalBounds().Height*.3f));
             plus_v.Size=new Vector2f(pluscir.GetGlobalBounds().Width*.2f,(pluscir.GetGlobalBounds().Height*.8f)-(pluscir.GetGlobalBounds().Height*.3f));
             numlabel.Position = new Vector2f(pluscir.GetGlobalBounds().Left+pluscir.GetGlobalBounds().Width,pluscir.GetGlobalBounds().Top);
-            isDoubleTicker = false;
-            isIntTicker = true;
 
 
 
-        }
-        public void Click(object? sender, MouseButtonEventArgs e){
-            if(e.Button== Mouse.Button.Left){
-                if(((IntRect)minuscir.GetGlobalBounds()).Contains(e.X,e.Y)|| ((IntRect)minus.GetGlobalBounds()).Contains(e.X,e.Y)){
-                    if(isIntTicker){
-                        
-                        int num = int.Parse(numlabel.DisplayedString)-1000;
-                        PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id] = num.ToString();
-                        deccstep = true;
-                        
-
-
-                        PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]--;
-                        numlblupdneeded = true;
-                    }
-
-                }else if(((IntRect)pluscir.GetGlobalBounds()).Contains(e.X,e.Y)|| ((IntRect)plus_h.GetGlobalBounds()).Contains(e.X,e.Y)|| ((IntRect)plus_v.GetGlobalBounds()).Contains(e.X,e.Y)){
-                    if(isIntTicker){
-
-
-                       PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]++;
-                       int num = ((int)min+(PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]-1)*(int)stepamt);
-                       numlabel.DisplayedString = num.ToString();
-                       PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id] = numlabel.DisplayedString;
-                       cstepcir.Position = new Vector2f(bar.GetGlobalBounds().Left + cstepcir.Position.X + ((float)cstepciroffset * (float)PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]),bar.GetGlobalBounds().Top - 7);
-                       inccstep = true;
-                       
-                      PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]++;
-                       numlblupdneeded=true;
-
-                    }
-                    
-                    
-                }
-
-            }
         }
         public NumTicker(Vector2f pos,double _min,double _max,double _stepamt, string desc, int _id){
 
@@ -109,37 +64,15 @@ namespace CityExtreme.Base.Gui{
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            Console.Write(numlblupdneeded);
-
             target.Draw(desclabel);
             target.Draw(minuscir);
             target.Draw(minus);
             target.Draw(bar);
-            
+            target.Draw(cstepcir);
             target.Draw(pluscir);
             target.Draw(plus_h);
             target.Draw(plus_v);
-            if(numlblupdneeded)
-            {
-                step = PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id];
-                numlabel.DisplayedString = PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id];
-                target.Draw(numlabel);
-                if(deccstep){
-                    cstepcir.Position = new Vector2f(bar.GetGlobalBounds().Left + cstepcir.Position.X - (float)cstepciroffset,bar.GetGlobalBounds().Top - 7);
-                    target.Draw(cstepcir);
-                    
-                }else if(inccstep){
-                    
-
-                    target.Draw(cstepcir);
-                    
-                }
-                
-            }
-            else{
-                target.Draw(numlabel);
-                target.Draw(cstepcir);
-            }
+            target.Draw(numlabel);
         }
     }
 }

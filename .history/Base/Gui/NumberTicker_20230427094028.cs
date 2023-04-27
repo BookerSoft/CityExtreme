@@ -21,7 +21,7 @@ namespace CityExtreme.Base.Gui{
         RectangleShape minus,plus_v,plus_h,bar;
         public int? min,max,steps,step,stepamt,id,cstepciroffset;
         public double? d_min,d_max,d_steps,d_stepamt;
-        public static bool isIntTicker,isDoubleTicker,numlblupdneeded=false,inccstep=false,deccstep=false;
+        public static bool isIntTicker,isDoubleTicker,numlblupdneeded=false;
         public NumTicker(Vector2f pos,int _min,int _max,int _stepamt, string desc, int _id){
             bounds = new IntRect((Vector2i)pos,new Vector2i(300,100));
             numlabel = new Text(_min.ToString(),Support.b.defFont,25);
@@ -73,8 +73,7 @@ namespace CityExtreme.Base.Gui{
                         
                         int num = int.Parse(numlabel.DisplayedString)-1000;
                         PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id] = num.ToString();
-                        deccstep = true;
-                        
+                        cstepcir.Position = new Vector2f(cstepcir.Position.X - (float)cstepciroffset,cstepcir.Position.Y);
 
 
                         PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]--;
@@ -89,9 +88,7 @@ namespace CityExtreme.Base.Gui{
                        int num = ((int)min+(PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]-1)*(int)stepamt);
                        numlabel.DisplayedString = num.ToString();
                        PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id] = numlabel.DisplayedString;
-                       cstepcir.Position = new Vector2f(bar.GetGlobalBounds().Left + cstepcir.Position.X + ((float)cstepciroffset * (float)PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]),bar.GetGlobalBounds().Top - 7);
-                       inccstep = true;
-                       
+                       cstepcir.Position = new Vector2f(cstepcir.Position.X + (float)cstepciroffset,cstepcir.Position.Y);
                       PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]++;
                        numlblupdneeded=true;
 
@@ -124,17 +121,8 @@ namespace CityExtreme.Base.Gui{
                 step = PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id];
                 numlabel.DisplayedString = PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id];
                 target.Draw(numlabel);
-                if(deccstep){
-                    cstepcir.Position = new Vector2f(bar.GetGlobalBounds().Left + cstepcir.Position.X - (float)cstepciroffset,bar.GetGlobalBounds().Top - 7);
-                    target.Draw(cstepcir);
-                    
-                }else if(inccstep){
-                    
-
-                    target.Draw(cstepcir);
-                    
-                }
                 
+                target.Draw(cstepcir);
             }
             else{
                 target.Draw(numlabel);

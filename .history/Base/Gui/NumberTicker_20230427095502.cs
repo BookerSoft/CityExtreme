@@ -89,7 +89,6 @@ namespace CityExtreme.Base.Gui{
                        int num = ((int)min+(PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]-1)*(int)stepamt);
                        numlabel.DisplayedString = num.ToString();
                        PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id] = numlabel.DisplayedString;
-                       cstepcir.Position = new Vector2f(bar.GetGlobalBounds().Left + cstepcir.Position.X + ((float)cstepciroffset * (float)PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]),bar.GetGlobalBounds().Top - 7);
                        inccstep = true;
                        
                       PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]++;
@@ -129,7 +128,7 @@ namespace CityExtreme.Base.Gui{
                     target.Draw(cstepcir);
                     
                 }else if(inccstep){
-                    
+                    cstepcir.Position = new Vector2f(bar.GetGlobalBounds().Left + cstepcir.Position.X + (float)cstepciroffset,bar.GetGlobalBounds().Top - 7);
 
                     target.Draw(cstepcir);
                     

@@ -11,8 +11,9 @@ namespace CityExtreme.Base.PreGame_Menu{
         public Gui.NumTicker[]  menuNumtickers =new Gui.NumTicker[2];
         public static bool[] menuDDVisible;
         public static bool[][] forddin = new bool[10][],issilclicked = new bool[10][];
-        
+        public static string[] numTickerNLDS = new string[2]; 
         public static int lastddin =-1,curddin=-1,ddlastpg=0;
+        public static int[] laststepforTicker = new int[2];
         public Gui.TextField SessionName;
         static PreLobby_FE _self;
         public PreLobby_FE(string type, ContextSettings? cs){
@@ -176,7 +177,7 @@ namespace CityExtreme.Base.PreGame_Menu{
         public void MouseWheelScrolled(object? sender,MouseWheelScrollEventArgs e){
             if(menuDropDowns!=null){
                 
-                    if(menuDropDowns[lastddin] != null ){
+                    if(lastddin >= 0 && menuDropDowns[lastddin] != null ){
                         menuDropDowns[lastddin].wheelMoved(sender,e);
                     }
                 
@@ -189,6 +190,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                         objsel();
                         bool ib,insil;
                         int l_id;
+                        
                         if(lastddin>=0){
                         l_id =lastddin;
 
@@ -220,7 +222,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                                      
                                     Console.Write(_self.menuDropDowns[lastddin].getsilclicked().ToString() + _self.menuDropDowns[1].getsilclicked()+Environment.NewLine);
                                     objsel();
-                            }else{
+                                }else{
                                 foreach(Gui.DropDownMenu dd in _self.menuDropDowns){
                                     if(dd != null)
                                     switch(dd.id){
@@ -252,6 +254,13 @@ namespace CityExtreme.Base.PreGame_Menu{
 
                             
                         }else{
+                            if(_self.menuNumtickers!=null){
+                            foreach(Gui.NumTicker nt in _self.menuNumtickers){
+                                if(nt!=null){
+                                    nt.Click(sender,e);
+                                }
+                            }
+                        }
                             objsel();
                         }
                     }else{
@@ -309,8 +318,19 @@ namespace CityExtreme.Base.PreGame_Menu{
                             
                             
                 }
+                if(menuNumtickers!=null){
+                    foreach(Gui.NumTicker nt in menuNumtickers){
+                        if(nt!=null){
+                            if(Gui.NumTicker.numlblupdneeded){
+                                target.Draw(nt);
+                            }else{
+                                target.Draw(nt);
+                            }
+                        }
+                    }
+                }
 
-                target.Draw(menuNumtickers[0]);
+                
 
             }
                     
