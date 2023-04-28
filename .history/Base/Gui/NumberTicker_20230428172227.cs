@@ -69,7 +69,7 @@ namespace CityExtreme.Base.Gui{
         public void Click(object? sender, MouseButtonEventArgs e){
             if(e.Button== Mouse.Button.Left){
                 if(((IntRect)minuscir.GetGlobalBounds()).Contains(e.X,e.Y)|| ((IntRect)minus.GetGlobalBounds()).Contains(e.X,e.Y)){
-                    if(isIntTicker && int.Parse(numlabel.DisplayedString)>min){
+                    if(isIntTicker && PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]>1){
                         
                         int num = int.Parse(numlabel.DisplayedString)-1000;
                         PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id] = num.ToString();
@@ -88,7 +88,7 @@ namespace CityExtreme.Base.Gui{
 
 
                                             
-                       int num = int.Parse(numlabel.DisplayedString)+(int)stepamt;
+                       int num = (int.Parse(numlabel.DisplayedString)+(int)stepamt)
                        
 
 
@@ -99,7 +99,7 @@ namespace CityExtreme.Base.Gui{
                       PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]++ ;
                        numlblupdneeded=true;
 
-                    
+                    }
                     
                     
                 }

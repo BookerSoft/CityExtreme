@@ -69,7 +69,7 @@ namespace CityExtreme.Base.Gui{
         public void Click(object? sender, MouseButtonEventArgs e){
             if(e.Button== Mouse.Button.Left){
                 if(((IntRect)minuscir.GetGlobalBounds()).Contains(e.X,e.Y)|| ((IntRect)minus.GetGlobalBounds()).Contains(e.X,e.Y)){
-                    if(isIntTicker && int.Parse(numlabel.DisplayedString)>min){
+                    if(isIntTicker){
                         
                         int num = int.Parse(numlabel.DisplayedString)-1000;
                         PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id] = num.ToString();
@@ -82,24 +82,21 @@ namespace CityExtreme.Base.Gui{
                     }
 
                 }else if(((IntRect)pluscir.GetGlobalBounds()).Contains(e.X,e.Y)|| ((IntRect)plus_h.GetGlobalBounds()).Contains(e.X,e.Y)|| ((IntRect)plus_v.GetGlobalBounds()).Contains(e.X,e.Y)){
-                    
-                    if(isIntTicker && PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]<steps){
-                        
+                    if(isIntTicker){
+                        PreGame_Menu.PreLobby_FE.laststepforTicker{(int)id}++;
 
 
-                                            
-                       int num = int.Parse(numlabel.DisplayedString)+(int)stepamt;
                        
-
-
-                       PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id] = num.ToString();}
+                       int num = ((int)min+(PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]-1)*(int)stepamt);
+                       
+                       PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id] = num.ToString();
                        cstepcir.Position = new Vector2f(bar.GetGlobalBounds().Left + cstepcir.Position.X + ((float)cstepciroffset * (float)PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]),bar.GetGlobalBounds().Top - 7);
                        inccstep = true;
                        
-                      PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]++ ;
+                      PreGame_Menu.PreLobby_FE.laststepforTicker[(int)id]++;
                        numlblupdneeded=true;
 
-                    
+                    }
                     
                     
                 }

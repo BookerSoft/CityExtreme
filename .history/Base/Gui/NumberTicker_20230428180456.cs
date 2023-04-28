@@ -69,7 +69,7 @@ namespace CityExtreme.Base.Gui{
         public void Click(object? sender, MouseButtonEventArgs e){
             if(e.Button== Mouse.Button.Left){
                 if(((IntRect)minuscir.GetGlobalBounds()).Contains(e.X,e.Y)|| ((IntRect)minus.GetGlobalBounds()).Contains(e.X,e.Y)){
-                    if(isIntTicker && int.Parse(numlabel.DisplayedString)>min){
+                    if(isIntTicker && int.Parse(numlabel.DisplayedString)>5000){
                         
                         int num = int.Parse(numlabel.DisplayedString)-1000;
                         PreGame_Menu.PreLobby_FE.numTickerNLDS[(int)id] = num.ToString();

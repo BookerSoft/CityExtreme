@@ -188,6 +188,13 @@ namespace CityExtreme.Base.PreGame_Menu{
                 case Mouse.Button.Left:{
                     if(Support.b.curobjective == "Total Daily Profit"){
                         objsel();
+                        if(_self.menuNumtickers!=null){
+                            foreach(Gui.NumTicker nt in _self.menuNumtickers){
+                                if(nt!=null){
+                                    nt.Click(sender,e);
+                                }
+                            }
+                        }
                         bool ib,insil;
                         int l_id;
                         
@@ -254,16 +261,11 @@ namespace CityExtreme.Base.PreGame_Menu{
 
                             
                         }else{
-                            if(_self.menuNumtickers!=null){
-                            foreach(Gui.NumTicker nt in _self.menuNumtickers){
-                                if(nt!=null){
-                                    nt.Click(sender,e);
-                                }
-                            }
-                        }
+                            
                             objsel();
                         }
                     }else{
+                        
                         objsel();
                         }   
                     break;
@@ -301,7 +303,17 @@ namespace CityExtreme.Base.PreGame_Menu{
             }
             if(Support.b.curobjective == "Total Daily Profit"){
               
-             
+             if(menuNumtickers!=null){
+                    foreach(Gui.NumTicker nt in menuNumtickers){
+                        if(nt!=null){
+                            if(Gui.NumTicker.numlblupdneeded){
+                                target.Draw(nt);
+                            }else{
+                                target.Draw(nt);
+                            }
+                        }
+                    }
+                }
             
                 if(menuDropDowns !=null){
                    
@@ -318,17 +330,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                             
                             
                 }
-                if(menuNumtickers!=null){
-                    foreach(Gui.NumTicker nt in menuNumtickers){
-                        if(nt!=null){
-                            if(Gui.NumTicker.numlblupdneeded){
-                                target.Draw(nt);
-                            }else{
-                                target.Draw(nt);
-                            }
-                        }
-                    }
-                }
+                
 
                 
 
