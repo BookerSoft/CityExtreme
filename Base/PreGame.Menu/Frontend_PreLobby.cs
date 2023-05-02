@@ -156,8 +156,67 @@ namespace CityExtreme.Base.PreGame_Menu{
                         
 
 
+            }else if(Support.b.curobjective == "Average Daily Profit" && Support.b.curobjective != Support.b.lastobjective){
+                string[] tmp = new string[Support.b.ddItemStrings.GetLongLength(1)];
+                for(int i=0;i<Support.b.ddItemStrings.GetLongLength(1);i++){
+                            tmp[i] = Support.b.ddItemStrings[0,i];
+
+                        }
+                        menuDropDowns[0] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(SessionName.Position.X,SessionName.Position.Y+SessionName.GlobalBounds.Height+sessNameText.GetGlobalBounds().Height+40),Support.b.objSettings[1,0,0],tmp,0);
+                        if(Support.b.plDDSilClicked[0] == null || Support.b.plForDDin[0] ==null)
+                        menuDropDowns[0].setNoOfBools();
+
+                        
+                        tmp = new string[Support.b.ddItemStrings.GetLongLength(1)];
+                        for(int i=0;i<Support.b.ddItemStrings.GetLongLength(1);i++){
+                            tmp[i] = Support.b.ddItemStrings[1,i];
+
+                        }
+                        
+                         
+                        menuDropDowns[1] = new Gui.DropDownMenu(2,new Vector2f(100,100),new Vector2f(sessNameLabel.Position.X,menuDropDowns[0].backing.Position.Y+menuDropDowns[0].backing.GetGlobalBounds().Height+10),Support.b.objSettings[1,1,0],tmp,1);
+                        int m =int.Parse(Support.b.objSettings[1,2,1]);
+                                              menuNumtickers[0] = new Gui.NumTicker(new Vector2f(menuDropDowns[0].backing.Position.X,menuDropDowns[0].backing.Position.Y +menuDropDowns[0].backing.GetGlobalBounds().Height+100),m,30000,1000,Support.b.objSettings[1,2,0],0);
+                        if(Support.b.plDDSilClicked[1] == null || Support.b.plForDDin[1] ==null)
+                        menuDropDowns[1].setNoOfBools(); 
+                        for(int a =0;a<menuDropDowns.Length;a++){
+                            if((a==lastddin && menuDropDowns[a]!=null)||menuDropDowns[a]!=null){
+                                if(Support.b.plDDSilClicked[a][0] == true){
+                                    
+                                    for(int b=0;b<Support.b.plForDDin[a].Length;b++){
+                                        if(b<2 && lastddin == a){
+                                            Support.b.plForDDin[a][b] = true;
+                                        
+                                        }else if(lastddin == a){
+                                            Support.b.plForDDin[a][b] = false;
+
+                                        }                                       
+                                        else if(b<2){
+                                            Support.b.plForDDin[a][b] = false;
+                                            
+                                        }else{
+                                            Support.b.plForDDin[a][b] = false;
+                                        }
+                                    }
+                                    if(a==lastddin)
+                                    {
+                                        menuDropDowns[a].isvisible =true;
+                                        if(ddlastpg != menuDropDowns[a].curpg)
+                                        menuDropDowns[a].curpg = ddlastpg;
+                                    }
+                                    else
+                                    menuDropDowns[a].isvisible =false;
+                                }
+                            }
+
+                            
+                        }
+                        
+
+
             }
         }
+
         static void objsel(){
             for(int i =0;i<_self.objButton.Length;i++){
                         if(_self.objButton[i].GetGlobalBounds().Contains(Mouse.GetPosition().X,Mouse.GetPosition().Y)){
@@ -166,6 +225,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                             Support.b.curobjective = _self.objButton[i].DisplayedString;
                             Support.b.objSelected[i] = true;
                             _self.initandPositionDropdowns();
+                            
                         }else if(Support.b.curobjective == _self.objButton[i].DisplayedString){
                             Support.b.objSelected[i] = true;
                         }else{
@@ -187,8 +247,23 @@ namespace CityExtreme.Base.PreGame_Menu{
             switch(e.Button){
                 case Mouse.Button.Left:{
                     if(Support.b.curobjective == "Total Daily Profit"){
+                        
                         objsel();
-                        if(_self.menuNumtickers!=null){
+                        goto executeactions;
+                    }else if(Support.b.curobjective == "Average Daily Profit"){
+                        
+                        objsel();
+                        goto executeactions;
+                        }   
+                    break;
+                    
+
+                    
+                }
+            }
+        executeactions:{
+           //Support.b.lastobjective = Support.b.curobjective;
+            if(_self.menuNumtickers!=null){
                             foreach(Gui.NumTicker nt in _self.menuNumtickers){
                                 if(nt!=null){
                                     nt.Click(sender,e);
@@ -264,17 +339,8 @@ namespace CityExtreme.Base.PreGame_Menu{
                             
                             objsel();
                         }
-                    }else{
-                        
-                        objsel();
-                        }   
-                    break;
-                    
-
-                    
-                }
-            }
-
+                        Support.b.lastobjective="";
+        }
                 
             
         }
@@ -303,7 +369,18 @@ namespace CityExtreme.Base.PreGame_Menu{
             }
             if(Support.b.curobjective == "Total Daily Profit"){
               
-             if(menuNumtickers!=null){
+             goto displaysettings;
+                
+
+                
+
+            }else if(Support.b.curobjective == "Average Daily Profit"){
+                goto displaysettings;
+
+            }
+            displaysettings:{
+
+                if(menuNumtickers!=null){
                     foreach(Gui.NumTicker nt in menuNumtickers){
                         if(nt!=null){
                             if(Gui.NumTicker.numlblupdneeded){
@@ -330,12 +407,7 @@ namespace CityExtreme.Base.PreGame_Menu{
                             
                             
                 }
-                
-
-                
-
-            }
-                    
+            }        
                 
             
             selMapTitle.Draw(target,states);

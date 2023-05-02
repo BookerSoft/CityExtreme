@@ -167,6 +167,22 @@ namespace CityExtreme.Base{
                                             }
                                             break;
                                         }
+                                        case "Average Daily Profit":{
+                                            if(Support.b.preLobby.menuDropDowns !=null && PreGame_Menu.PreLobby_FE.curddin>=0 &&Support.b.plForDDin[PreGame_Menu.PreLobby_FE.curddin][2])
+                                                Draw(Support.b.preLobby);
+                                            else
+                                            Draw(Support.b.preLobby);    
+                                            if(Support.b.preLobby.menuNumtickers !=null){
+                                                foreach(Gui.NumTicker nt in Support.b.preLobby.menuNumtickers){
+                                                    if(nt != null && Gui.NumTicker.numlblupdneeded){
+                                                        Draw(Support.b.preLobby);
+                                                    }else{
+                                                        Draw(Support.b.preLobby);
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        }
                                     }
                                 }
                                 

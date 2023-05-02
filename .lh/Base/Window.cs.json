@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 14,
             "patches": [
                 {
                     "date": 1681833638625,
@@ -60,6 +60,10 @@
                 {
                     "date": 1682458709912,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,9 +157,9 @@\n                                             else\r\n                                             Draw(Support.b.preLobby);    \r\n                                             if(Support.b.preLobby.menuNumtickers !=null){\r\n                                                 foreach(Gui.NumTicker nt in Support.b.preLobby.menuNumtickers){\r\n-                                                    if(nt != null && nt.numlblupdneeded){\r\n+                                                    if(nt != null && Gui.NumTicker.numlblupdneeded){\r\n                                                         Draw(Support.b.preLobby);\r\n                                                     }else{\r\n                                                         Draw(Support.b.preLobby);\r\n                                                     }\r\n"
+                },
+                {
+                    "date": 1683063311807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -166,8 +166,24 @@\n                                                 }\r\n                                             }\r\n                                             break;\r\n                                         }\r\n+                                        case \"Average Daily Profit\":{\r\n+                                            if(Support.b.preLobby.menuDropDowns !=null && PreGame_Menu.PreLobby_FE.curddin>=0 &&Support.b.plForDDin[PreGame_Menu.PreLobby_FE.curddin][2])\r\n+                                                Draw(Support.b.preLobby);\r\n+                                            else\r\n+                                            Draw(Support.b.preLobby);    \r\n+                                            if(Support.b.preLobby.menuNumtickers !=null){\r\n+                                                foreach(Gui.NumTicker nt in Support.b.preLobby.menuNumtickers){\r\n+                                                    if(nt != null && Gui.NumTicker.numlblupdneeded){\r\n+                                                        Draw(Support.b.preLobby);\r\n+                                                    }else{\r\n+                                                        Draw(Support.b.preLobby);\r\n+                                                    }\r\n+                                                }\r\n+                                            }\r\n+                                            break;\r\n+                                        }\r\n                                     }\r\n                                 }\r\n                                 \r\n \r\n"
                 }
             ],
             "date": 1681833638625,

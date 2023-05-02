@@ -68,7 +68,7 @@ namespace CityExtreme.Base.Gui{
         }
         public void Click(object? sender, MouseButtonEventArgs e){
             if(e.Button== Mouse.Button.Left){
-                if(((IntRect)minuscir.GetGlobalBounds()).Contains(e.X,e.Y)|| ((IntRect)minus.GetGlobalBounds()).Contains(e.X,e.Y)){
+                `{
                     if(isIntTicker && int.Parse(numlabel.DisplayedString)>min){
                         
                         int num = int.Parse(numlabel.DisplayedString)-1000;
